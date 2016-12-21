@@ -4,7 +4,8 @@
     <audio :src="songUrl" controls></audio>
     <input type="text">
     <p>{{songUrl}}</p>
-    <button>搜索</button>
+    <button @click='ajax'>搜索</button>
+    <p>{{cc}}</p>
   </div>
 </template>
 <script>
@@ -16,7 +17,7 @@ export default {
       audio: {
         songUrl: '',
         songId: '105552428',
-        imgUrl: 'http://m.kugou.com/v3/static/images/index/logo_kugou.png',
+        imgUrl: '',
         title: '',
         singer: '',
         currentLength: 0,
@@ -62,11 +63,30 @@ export default {
         "subcode": 0,
         "time": 1482224695,
         "tips": ""
-      }
+      },
+      cc: ''
     }
   },
   computed: {
     songUrl () { return `http://ws.stream.qqmusic.qq.com/${this.audio.songId}.m4a?fromtag=46` }
+  },
+  methods: {
+    ajax () {
+      let self = this
+      let num = 3
+      let name = '王菲'
+      let urlString = `/fcgi-bin/music_search_new_platform?t=0&n=${num}&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=${name}`
+      this.$http.get(urlString)
+      .then(function (data) {
+        // Object.prototype.toString.call(data)
+        // data = JSON.parse(data)
+        // data['data']['song']['list'].forEach(
+        //   e => console.log(e['f'])
+        // )
+        self.cc = data
+        console.log(data['data'])
+      })
+    }
   }
   // components: {
   //   Hello
