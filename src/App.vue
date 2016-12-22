@@ -73,7 +73,7 @@ export default {
   methods: {
     ajax () {
       let self = this
-      let num = 3
+      let num = 2
       let name = '王菲'
       let urlString = `/fcgi-bin/music_search_new_platform?t=0&n=${num}&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=${name}`
       this.$http.get(urlString)
@@ -83,8 +83,9 @@ export default {
         // data['data']['song']['list'].forEach(
         //   e => console.log(e['f'])
         // )
-        self.cc = data
-        console.log(data['data'])
+        self.cc = JSON.parse(JSON.stringify(data))
+        console.log(self.cc.data.data.priority)
+//      console.log(Object.prototype.toString.call())
       })
     }
   }
