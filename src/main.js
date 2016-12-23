@@ -7,7 +7,7 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 Vue.use(MuseUI)
 Vue.prototype.$http = Axios
-  /* eslint-disable no-new */
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
