@@ -73,16 +73,19 @@ export default {
   },
   methods: {
     ajax () {
-      // let self = this
+      let self = this
       let num = 2
       let name = '王菲'
       let urlString = `/fcgi-bin/music_search_new_platform?t=0&n=${num}&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=${name}`
       $.get(urlString, function (data) {
         // console.log(JSON.parse(data))
         data = JSON.parse(data)
-        // self.cc = data
+        self.cc = data
         data['data']['song']['list'].forEach(
-          e => console.log(e['f'])
+          e => {
+            let es = e['f'].split('|')
+            console.log(es[0])
+          }
         )
       })
 //       $.get(urlString)
