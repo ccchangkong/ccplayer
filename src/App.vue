@@ -84,7 +84,7 @@ export default {
         data['data']['song']['list'].forEach(
           e => {
             let es = e['f'].split('|')
-            console.log(es[0])
+            console.log(es[0] + es[1])
           }
         )
       })
