@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <audio :src="songUrl" controls></audio>
-    <input type="text">
+    <audio :src="audio.songUrl" controls></audio>
+    <input type="text" v-model="audio.keyWord">
     <p>{{songUrl}}</p>
     <button @click='ajax'>搜索</button>
-    <p>{{cc}}</p>
+    <ul>
+      <li v-for="item in cc">
+        {{ es(item.f) }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -23,20 +27,12 @@ export default {
         singer: '',
         currentLength: 0,
         songLength: 0,
-        currentFlag: false
+        currentFlag: false,
+        keyWord: ''
       },
       searchList: {
         "code": 0,
         "data": {
-          "keyword": "",
-          "priority": 0,
-          "qc": [],
-          "semantic": {
-            "curnum": 0,
-            "curpage": 1,
-            "list": [],
-            "totalnum": 0
-          },
           "song": {
             "curnum": 4,
             "curpage": 1,
@@ -69,36 +65,30 @@ export default {
     }
   },
   computed: {
-    songUrl () { return `http://ws.stream.qqmusic.qq.com/${this.audio.songId}.m4a?fromtag=46` }
+    es (f) { return f }
   },
   methods: {
     ajax () {
       let self = this
       let num = 2
-      let name = '王菲'
-      let urlString = `/fcgi-bin/music_search_new_platform?t=0&n=${num}&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=${name}`
+      // let name = '小小冒险者'
+      // let name = this.audio.keyWord
+      let urlString = `/fcgi-bin/music_search_new_platform?t=0&n=${num}&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=${this.audio.keyWord}`
       $.get(urlString, function (data) {
-        // console.log(JSON.parse(data))
+        console.log(JSON.parse(data))
         data = JSON.parse(data)
-        self.cc = data
-        data['data']['song']['list'].forEach(
-          e => {
-            let es = e['f'].split('|')
-            console.log(es[0] + es[1])
-          }
-        )
+        self.cc = data['data']['song']['list']
+        let es = data['data']['song']['list'][0]['f'].split('|')
+        // console.log(es[0] + ' ' + es[1])
+        self.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${es[0]}.m4a?fromtag=46`
+        // data['data']['song']['list'].forEach(
+        //   e => {
+        //     let es = e['f'].split('|')
+        //     self.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${es[0]}.m4a?fromtag=46`
+        //     console.log(es[0] + ' ' + es[1])
+        //   }
+        // )
       })
-//       $.get(urlString)
-//       .then(function (data) {
-//         // Object.prototype.toString.call(data)
-//         // data = JSON.parse(data)
-//         // data['data']['song']['list'].forEach(
-//         //   e => console.log(e['f'])
-//         // )
-//         self.cc = data
-//         console.log(data.data.priority)
-// //      console.log(Object.prototype.toString.call())
-//       })
     }
   }
   // components: {
