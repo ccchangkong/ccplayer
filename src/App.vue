@@ -6,8 +6,8 @@
     <p>{{songUrl}}</p>
     <button @click='ajax'>搜索</button>
     <ul>
-      <li v-for="item in cc">
-        {{ es(item.f) }}
+      <li v-for="i in cc">
+        {{ es(i.f) }}
       </li>
     </ul>
   </div>
