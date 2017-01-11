@@ -67,7 +67,7 @@ export default {
   },
   computed: {
     // es (f) { return `http://ws.stream.qqmusic.qq.com/${f}.m4a?fromtag=46` }
-    es () { return this.audio.keyWord + '!' }
+    es () { return this.audio.keyWord + '!!' }
   },
   methods: {
     ajax () {
