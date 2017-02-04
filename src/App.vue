@@ -79,8 +79,8 @@ export default {
       $.get(urlString, function (data) {
         data = JSON.parse(data)
         // self.cc = data['data']['song']['list']
-        let es = data['data']['song']['list'][0]['f'].split('|')
-        self.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${es[0]}.m4a?fromtag=46`
+        // let es = data['data']['song']['list'][0]['f'].split('|')
+        // self.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${es[0]}.m4a?fromtag=46`
         data['data']['song']['list'].forEach(
           e => {
             let es = e['f'].split('|')
