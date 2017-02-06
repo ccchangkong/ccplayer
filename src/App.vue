@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     
+     <!--<p>{{store.state.aa.id}}22</p>-->
         <img :src="audio.imgUrl" alt="">
     <audio ref="player" :src="audio.songUrl" controls></audio>
     <input type="text" v-model="audio.keyWord">
@@ -34,6 +34,12 @@ export default {
       cc: [],
       img: '',
       imgW: []
+    }
+  },
+  vuex: {
+    getters: {
+      // bb: store => store.state.bb,
+      aa: store => store.state.aa
     }
   },
   // beforeMount () {

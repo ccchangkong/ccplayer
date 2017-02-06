@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 // import router from './router'
-// import store from './store'
+import store from './store'
 import Axios from 'axios'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
@@ -11,5 +11,6 @@ Vue.prototype.$http = Axios
 new Vue({
   el: '#app',
   template: '<App/>',
+  store,
   components: { App }
 })
