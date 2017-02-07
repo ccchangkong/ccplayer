@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-     <!--<p>{{store.state.aa.id}}22</p>-->
+     <p>{{$store.state.aa}}</p>
+     <p>{{aa}}</p>
         <img :src="audio.imgUrl" alt="">
     <audio ref="player" :src="audio.songUrl" controls></audio>
     <input type="text" v-model="audio.keyWord">
@@ -14,8 +15,9 @@
   </div>
 </template>
 <script>
-// import Hello from './components/Hello'
+// import {aa} from './vuex/store.js'
 import $ from 'jquery'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'app',
   data () {
@@ -36,12 +38,21 @@ export default {
       imgW: []
     }
   },
-  vuex: {
-    getters: {
-      // bb: store => store.state.bb,
-      aa: store => store.state.aa
-    }
+  computed: {
+    ...mapGetters([
+      'aa'
+      // ...
+    ]),
+    ...mapState([
+      'aa'
+    ])
   },
+  // vuex: {
+  //   getters: {
+  //     // bb: state => state.bb,
+  //     aa: state => state.aa
+  //   }
+  // },
   // beforeMount () {
   //   for (let i = 0; i < 100; i++) {
   //     this.imgW[i] = `http://imgcache.qq.com/music/photo/album_${i * 10}/97/${i * 10}_albumpic_1279297_0.jpg`
@@ -52,6 +63,7 @@ export default {
   // },
   methods: {
     ajax () {
+      window.alert(this.aa)
       let self = this
       let num = 2
       // let name = '小小冒险者'

@@ -5,26 +5,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     aa: '222'
-    // audio:{
-    //   songUrl:'',
-    //   imgUrl:'http://m.kugou.com/v3/static/images/index/logo_kugou.png',
-    //   title:'',
-    //   singer:''
-    // },
-    // headNav:'head-nav1',
-    // audioLoadding:false,
-    // head:{
-    //   toggle:false,
-    //   title:'',
-    //   style:{'background':'rgba(43,162,251,0)'}
-
-    // }
   },
   getters: {
     aa: state => state.aa
-    // head:state=>state.head,
-    // audioLoadding:state=>state.audioLoadding
-    // selected:state=>state.selected
   }
   // mutations:{
   //   setAudio(state,audio){
