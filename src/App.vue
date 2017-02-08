@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <p>{{$store.state.aa}}</p>
+     <p>{{$store.getters.bb}}</p>
      <p>{{aa}}</p>
         <img :src="audio.imgUrl" alt="">
     <audio ref="player" :src="audio.songUrl" controls></audio>
@@ -17,6 +17,7 @@
 <script>
 // import {aa} from './vuex/store.js'
 import $ from 'jquery'
+// import { mapState } from 'vuex'
 import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'app',
@@ -40,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'aa'
+      'bb'
       // ...
     ]),
     ...mapState([
@@ -63,7 +64,6 @@ export default {
   // },
   methods: {
     ajax () {
-      window.alert(this.aa)
       let self = this
       let num = 2
       // let name = '小小冒险者'

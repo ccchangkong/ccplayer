@@ -4,10 +4,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    aa: '222'
+    aa: '222',
+    bb: '333'
   },
   getters: {
-    aa: state => state.aa
+    bb: state => state.bb
   }
   // mutations:{
   //   setAudio(state,audio){
