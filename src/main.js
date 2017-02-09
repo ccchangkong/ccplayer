@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-// import router from './router'
+import router from './router/router.js'
 import store from './vuex/store.js'
 // import Axios from 'axios'
 import MuseUI from 'muse-ui'
@@ -12,5 +12,6 @@ new Vue({
   el: '#app',
   template: '<App/>',
   store,
+  router,
   components: { App }
-})
+}).$mount('#app')

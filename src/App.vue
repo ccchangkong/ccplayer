@@ -2,6 +2,11 @@
   <div id="app">
      <p>{{$store.getters.bb}}</p>
      <p>{{aa}}</p>
+    
+     <router-link to='/test'>test</router-link>
+     <router-link to='/test2'>test</router-link>
+     
+      <keep-alive><router-view></router-view></keep-alive>
         <img :src="audio.imgUrl" alt="">
     <audio ref="player" :src="audio.songUrl" controls></audio>
     <input type="text" v-model="audio.keyWord">
@@ -23,17 +28,17 @@ export default {
   name: 'app',
   data () {
     return {
-      audio: {
-        songUrl: '',
-        songId: '105552428',
-        imgUrl: '',
-        title: '',
-        singer: '',
-        currentLength: 0,
-        songLength: 0,
-        currentFlag: false,
-        keyWord: '小小冒险者'
-      },
+      // audio: {
+      //   songUrl: '',
+      //   songId: '105552428',
+      //   imgUrl: '',
+      //   title: '',
+      //   singer: '',
+      //   currentLength: 0,
+      //   songLength: 0,
+      //   currentFlag: false,
+      //   keyWord: '小小冒险者'
+      // },
       cc: [],
       img: '',
       imgW: []
@@ -45,7 +50,8 @@ export default {
       // ...
     ]),
     ...mapState([
-      'aa'
+      'aa',
+      'audio'
     ])
   },
   // vuex: {
