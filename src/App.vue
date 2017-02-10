@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-     <p>{{$store.getters.bb}}</p>
-     <p>{{aa}}</p>
-    
-     <router-link to='/test'>test</router-link>
-     <router-link to='/test2'>test</router-link>
-     
+     <!--<p>{{$store.getters.bb}}</p>
+     <p>{{aa}}</p>  -->
+     <router-link to='/search'>search</router-link>
+     <router-link to='/hot'>hot</router-link> 
+     <router-link to='/history'>history</router-link>    
+     <router-link to='/list'>list</router-link>  
+
       <keep-alive><router-view></router-view></keep-alive>
-        <img :src="audio.imgUrl" alt="">
-    <audio ref="player" :src="audio.songUrl" controls></audio>
+
+      <player></player>
     <input type="text" v-model="audio.keyWord">
     <p>{{songUrl}}</p>
     <button @click='ajax'>搜索</button>
@@ -17,28 +18,22 @@
         <p @click="ccs(n)">{{ i }}</p>
       </li>
     </ul>
+    <BButton></BButton>
   </div>
 </template>
 <script>
-// import {aa} from './vuex/store.js'
 import $ from 'jquery'
-// import { mapState } from 'vuex'
-import { mapGetters, mapState } from 'vuex'
+import Player from './components/player.vue'
+import BButton from './components/button.vue'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
   name: 'app',
+  components: {
+    Player,
+    BButton
+  },
   data () {
     return {
-      // audio: {
-      //   songUrl: '',
-      //   songId: '105552428',
-      //   imgUrl: '',
-      //   title: '',
-      //   singer: '',
-      //   currentLength: 0,
-      //   songLength: 0,
-      //   currentFlag: false,
-      //   keyWord: '小小冒险者'
-      // },
       cc: [],
       img: '',
       imgW: []
@@ -46,30 +41,18 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'bb'
       // ...
     ]),
     ...mapState([
-      'aa',
       'audio'
     ])
   },
-  // vuex: {
-  //   getters: {
-  //     // bb: state => state.bb,
-  //     aa: state => state.aa
-  //   }
-  // },
-  // beforeMount () {
-  //   for (let i = 0; i < 100; i++) {
-  //     this.imgW[i] = `http://imgcache.qq.com/music/photo/album_${i * 10}/97/${i * 10}_albumpic_1279297_0.jpg`
-  //   }
-  // },
-  // computed: {
-  //   es () { return `http://imgcache.qq.com/music/photo/album_${this.img}/97/${this.img}_albumpic_1279297_0.jpg` }
-  // },
   methods: {
+    ...mapMutations([
+      'test' // 映射 this.increment() 为 this.$store.commit('increment')
+    ]),
     ajax () {
+      this.test()
       let self = this
       let num = 2
       // let name = '小小冒险者'
@@ -90,19 +73,14 @@ export default {
         )
       })
     },
-    ccs (f) {
+    ccs (f, w = 300) {
       this.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${this.cc[f].id}.m4a?fromtag=46`
-      let width = 300
-      this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${width}/${this.cc[f].pic % 100}/${width}_albumpic_${this.cc[f].pic}_0.jpg`
-      this.$nextTick(function () {
-        // window.alert(this.$refs.player.src)
-        this.$refs.player.play()
-      })
+      this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${this.cc[f].pic % 100}/${w}_albumpic_${this.cc[f].pic}_0.jpg`
+      // this.$nextTick(function () {
+      //   this.$refs.player.play()
+      // })
     }
   }
-  // components: {
-  //   Hello
-  // }
 }
 </script>
 <style>

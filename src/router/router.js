@@ -4,10 +4,16 @@ Vue.use(VueRouter)
 const route = new VueRouter({
   routes: [
     {
-      path: '/test', component: require('../components/hello.vue')
+      path: '/search', component: require('../views/search.vue')
     },
     {
-      path: '/test2', component: require('../components/hell.vue')
+      path: '/history', component: require('../views/history.vue')
+    },
+    {
+      path: '/list', component: require('../views/list.vue')
+    },
+    {
+      path: '/hot', component: require('../views/hot.vue')
     }
   //   {
   //   path: '/index', component: require('../views/index')

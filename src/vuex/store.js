@@ -20,33 +20,12 @@ const store = new Vuex.Store({
   },
   getters: {
     bb: state => state.bb
+  },
+  mutations: {
+    test (state) {
+      // window.alert(state.aa)
+    }
   }
-  // mutations:{
-  //   setAudio(state,audio){
-  //     state.audio=audio;
-  //   },
-  //   showHead(state,title){
-  //     state.head.toggle=true;
-  //   },
-  //   setHeadTitle(state,title){
-  //     state.head.title=title;
-  //   },
-  //   hideHead(state){
-  //     state.head.toggle=false;
-  //   },
-  //   setHeadStyle(state,style){
-  //     state.head.style=style;
-  //   },
-  //   resetHeadStyle:state=>{
-  //     state.head.style={'background':'rgba(43,162,251,0)'};
-  //   },
-  //   toggleAudioLoadding:state=>{
-  //     state.audioLoadding=!state.audioLoadding;
-  //   },
-  //   setHeadNav:(state,index)=>{
-  //     state.headNav='head-nav'+index;
-  //   }
-  // }
 })
 
 export default store

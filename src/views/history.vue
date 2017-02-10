@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>s!</p>
+    <p>his</p>
       <!--<div class="search-panel">
         <div class="search-input">
           <span class="search-icon"></span>
