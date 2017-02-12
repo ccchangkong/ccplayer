@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-const route = new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: '/search', component: require('../views/search.vue')
@@ -14,14 +14,9 @@ const route = new VueRouter({
     },
     {
       path: '/hot', component: require('../views/hot.vue')
+    }, {
+      path: '*', redirect: '/search'
     }
-  //   {
-  //   path: '/index', component: require('../views/index')
-  // }, {
-  //   path: '/singer/info/:id', component: require('../views/singer_info')
-  // }, {
-  //   path: '*', redirect: '/index'
-  // }
   ]
   // scrollBehavior (to, from, savedPosition) {
   //   if (savedPosition) {
@@ -32,4 +27,4 @@ const route = new VueRouter({
   // }
 })
 
-export default route
+export default router

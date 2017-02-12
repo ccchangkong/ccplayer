@@ -7,7 +7,9 @@
      <router-link to='/history'>history</router-link>    
      <router-link to='/list'>list</router-link>  
 
-      <keep-alive><router-view></router-view></keep-alive>
+      <keep-alive>
+        <transition><router-view></router-view></transition>
+        </keep-alive>
 
       <player></player>
     <input type="text" v-model="audio.keyWord">
@@ -81,6 +83,9 @@ export default {
       // })
     }
   }
+  // created () {
+  //   this.$router.go('')
+  // }
 }
 </script>
 <style>
