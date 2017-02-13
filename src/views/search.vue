@@ -1,31 +1,15 @@
 <template>
   <div>
-    <p>s!</p>
-      <!--<div class="search-panel">
-        <div class="search-input">
-          <span class="search-icon"></span>
-          <input type="text" v-model="keyword" placeholder="歌手/歌名/拼音" @keydown.enter="search">
-        </div>
-        <button href="javascript:;" @click="search" class="search-btn">搜索</button>
-      </div>
-
-      <div class="search-list" v-show="togglePanel">
-          <div class="search-list-title">最近热门</div>
-          <mt-cell v-for="(item,index) in hotList" :title="item" @click.native="replaceInput(index)"></mt-cell>
-      </div>
-
-      <div class="songs-list" v-show="!togglePanel">
-          <div class="search-total">
-            共有{{total}}条搜索结果
-          </div>
-          <mt-cell v-for="(item,index) in songList" :title="item.filename" @click.native="playAudio(index)">
-            <img src="../../static/download_icon.png" alt="" width="20" height="20">
-          </mt-cell>
-      </div>-->
+    <ul>
+      <li v-for="(i,n) in audioList">
+        <p @click="fill(n)">{{ i }}</p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+  import { mapGetters, mapState } from 'vuex'
   export default {
     data () {
       return {
@@ -33,7 +17,23 @@
     },
     created () {
     },
+    computed: {
+      ...mapGetters([
+        // ...
+      ]),
+      ...mapState([
+        'audio',
+        'audioList'
+      ])
+    },
     methods: {
+      fill (f, w = 500) {
+        this.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${this.audioList[f].id}.m4a?fromtag=46`
+        this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${this.audioList[f].pic % 100}/${w}_albumpic_${this.audioList[f].pic}_0.jpg`
+        // this.$nextTick(function () {
+        //   this.$refs.player.play()
+        // })
+      }
       // getList(){
       //   Indicator.open({
       //     text: '加载中...',

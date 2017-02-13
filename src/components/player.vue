@@ -1,6 +1,6 @@
 <template>
   <div id="player">
-    <img :src="audio.imgUrl" alt="">
+    
     <audio ref="player" :src="audio.songUrl" controls></audio>
   </div>
 </template>
