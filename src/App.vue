@@ -20,19 +20,19 @@
         <p @click="ccs(n)">{{ i }}</p>
       </li>
     </ul>
-    <BButton></BButton>
+    <Buttons></Buttons>
   </div>
 </template>
 <script>
 import $ from 'jquery'
 import Player from './components/player.vue'
-import BButton from './components/button.vue'
+import Buttons from './components/button.vue'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
   name: 'app',
   components: {
     Player,
-    BButton
+    Buttons
   },
   data () {
     return {
