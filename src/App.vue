@@ -61,6 +61,7 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  transition: .5s;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -79,6 +80,9 @@ header {
           linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
           background-blend-mode: screen;
   overflow: hidden;
+}
+header:hover {
+  height: 55%;
 }
 .a-img {
   /*height: 100%;*/
