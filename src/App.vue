@@ -12,9 +12,12 @@
      <router-link to='/history'>history</router-link>    
      <router-link to='/list'>list</router-link> 
       </nav>
-      <keep-alive>
-        <transition><router-view class="a-view"></router-view></transition>
-        </keep-alive>  
+      <div class="a-view">
+<keep-alive >
+        <transition><router-view ></router-view></transition>
+        </keep-alive> 
+      </div>
+       
     <input type="text" v-model="audio.keyWord">
     <Buttons></Buttons>
   </div>
@@ -52,6 +55,13 @@ export default {
 }
 </script>
 <style>
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,11 +70,14 @@ export default {
   color: #2c3e50;
   /*margin-top: 60px;*/
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden; 
 }
+
 header {
   height: 40%;
-  background-color: #333;
+  background:
+          linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
+          background-blend-mode: screen;
   overflow: hidden;
 }
 .a-img {
