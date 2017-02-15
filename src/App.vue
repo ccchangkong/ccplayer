@@ -105,7 +105,7 @@ html {
 }
 
 header {
-  height: 40%;
+  height: 30%;
   background:
           linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
           background-blend-mode: screen;
@@ -114,7 +114,8 @@ header {
   
 }
 header:hover {
-  height: 55%;
+  height: 50%;
+  max-height: 100vw;
 }
 .a-img {
   /*height: 100%;*/
@@ -128,5 +129,6 @@ nav {
 }
 .a-view {
   height: 20%;
+  overflow: hidden;
 }
 </style>
