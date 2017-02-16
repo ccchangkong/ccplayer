@@ -23,8 +23,8 @@
         jsonpCallback: "JsonCallback",
         scriptCharset: 'GBK', // 设置编码，否则会乱码
         success: function (data) {
-          self.list = JSON.stringify(data)
-          // console.log()
+          self.list = data
+          console.log(Object.prototype.toString.call(self.list))
         },
         error: function () {
           console.log('fail')
