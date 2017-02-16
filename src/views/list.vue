@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p>{{list}}</p>
+    <div v-for="(item,index) in list">
+<p>{{item.id}}{{item.sn}}{{item.ai}}</p>
+    </div>
+    
   </div>
 </template>
 
@@ -9,10 +12,10 @@
   export default {
     data () {
       return {
-        list: ''
+        list: []
       }
     },
-    created () {
+    mounted () {
       let self = this
       $.ajax({
         type: "get",
@@ -23,8 +26,14 @@
         jsonpCallback: "JsonCallback",
         scriptCharset: 'GBK', // 设置编码，否则会乱码
         success: function (data) {
-          self.list = data
-          console.log(Object.prototype.toString.call(self.list))
+          // self.list = data.songlist
+          data.songlist.forEach(
+            e => {
+              self.list.push({id: e.id, sn: e.songName, ai: e.albumId})
+              // self.audioList.push({id: es[0], pic: es[4]})
+            }
+          )
+          // console.log()
         },
         error: function () {
           console.log('fail')
