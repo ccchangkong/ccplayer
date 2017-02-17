@@ -113,10 +113,10 @@ header {
   transition: .5s;
   
 }
-header:hover {
+/*header:hover {
   height: 50%;
   max-height: 100vw;
-}
+}*/
 .a-img {
   /*height: 100%;*/
   width: 100%;
@@ -130,5 +130,6 @@ nav {
 .a-view {
   height: 20%;
   overflow: hidden;
+  overflow-y: scroll;
 }
 </style>
