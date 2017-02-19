@@ -104,22 +104,35 @@ scale = function(btn, bar, title) {
 };
 scale.prototype = {
   init: function() {
-    var f = this,
+    let f = this,
       g = document,
       b = window,
       m = Math;
     f.btn.onmousedown = function(e) {
-      var x = (e || b.event).clientX;
-      var l = this.offsetLeft;
-      var max = f.bar.offsetWidth - this.offsetWidth;
+      let x = (e || b.event).clientX;
+      let l = this.offsetLeft;
+      let max = f.bar.offsetWidth - this.offsetWidth;
       g.onmousemove = function(e) {
-        var thisX = (e || b.event).clientX;
-        var to = m.min(max, m.max(-2, l + (thisX - x)));
+        let thisX = (e || b.event).clientX;
+        let to = m.min(max, m.max(-2, l + (thisX - x)));
         f.btn.style.left = to + 'px';
         f.ondrag(m.round(m.max(0, to / max) * 100), to);
         b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
       };
       g.onmouseup = new Function('this.onmousemove=null');
+    };
+    f.btn.ontouchstart = function(e) {
+      let x = (e || b.event).clientX;
+      let l = this.offsetLeft;
+      let max = f.bar.offsetWidth - this.offsetWidth;
+      g.ontouchmove = function(e) {
+        let thisX = (e || b.event).clientX;
+        let to = m.min(max, m.max(-2, l + (thisX - x)));
+        f.btn.style.left = to + 'px';
+        f.ondrag(m.round(m.max(0, to / max) * 100), to);
+        b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+      };
+      g.ontouchend = new Function('this.handleTouchEnd=null');
     };
   },
   ondrag: function(pos, x) {
