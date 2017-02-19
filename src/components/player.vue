@@ -1,8 +1,9 @@
 <template>
   <div id="player">    
-    <audio ref="player" :src="audio.songUrl" controls autoplay></audio>
+    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls autoplay loop></audio>
+    <button @click='yl'>音量</button>
     <button @click="togglePanel">播放暂停</button>
-    <p>{{pt}}</p>
+    <p>{{pt | time}}/{{apt | time}}</p>
   </div>
 </template>
 <script>
@@ -11,7 +12,8 @@ export default {
   name: 'player',
   data () {
     return {
-      pt: ''
+      pt: '',
+      apt: ''
     }
   },
   computed: {
@@ -25,7 +27,6 @@ export default {
   methods: {
     togglePanel () {
       let audio = this.$refs.player
-      this.pt = audio.currentTime
       if (audio !== null) {
         if (!audio.paused) {
           audio.pause()
@@ -33,6 +34,29 @@ export default {
           audio.play()
         }
       }
+    },
+    pts () {
+      this.pt = this.$refs.player.currentTime
+    },
+    apts () {
+      this.apt = this.$refs.player.duration
+    },
+    yl () {
+      this.$refs.player.muted = !this.$refs.player.muted
+    }
+  },
+  filters: {
+    time (value) {
+      var length = Math.floor(value)
+      var minute = Math.floor(value / 60)
+      if (minute < 10) {
+        minute = '0' + minute
+      }
+      var second = length % 60
+      if (second < 10) {
+        second = '0' + second
+      }
+      return minute + ':' + second
     }
   }
   // components: {
