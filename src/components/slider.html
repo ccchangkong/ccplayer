@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+  <title>滚动条拖动评分的JS效果</title>
+  <style>
+  body {
+    margin: 50px;
+    ;
+  }
+
+  .scale_panel {
+    font-size: 12px;
+    color: #999;
+    width: 200px;
+    position: absolute;
+    line-height: 18px;
+    left: 60px;
+    top: -0px;
+  }
+
+  .scale_panel .r {
+    float: right;
+  }
+
+  .scale span {
+    background: url(http://www.poluoluo.com/jzxy/UploadFiles_333/201107/20110730193401905.gif) no-repeat;
+    width: 8px;
+    height: 16px;
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    cursor: pointer;
+  }
+
+  .scale {
+    background: url(http://www.poluoluo.com/jzxy/UploadFiles_333/201107/20110730193402219.gif) repeat-x 0 100%;
+    border-left: 1px #83BBD9 solid;
+    border-right: 1px red solid;
+    width: 200px;
+    height: 10px;
+    position: relative;
+    font-size: 0px;
+  }
+
+  .scale div {
+    background: url(http://www.poluoluo.com/jzxy/UploadFiles_333/201107/20110730193402948.gif) repeat-x;
+    width: 0px;
+    position: absolute;
+    width: 0;
+    left: 0;
+    height: 5px;
+    bottom: 0;
+  }
+
+  li {
+    font-size: 12px;
+    line-height: 50px;
+    position: relative;
+    height: 50px;
+    list-style: none;
+  }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>爱情 <span id="title">0</span>
+      <div class="scale_panel">
+        <span class="r">100</span>0
+        <div class="scale" id="bar">
+          <div></div>
+          <span id="btn"></span>
+        </div>
+      </div>
+    </li>
+    <li>事业 <span id="title2">0</span>
+      <div class="scale_panel">
+        <span class="r">100</span>0
+        <div class="scale" id="bar2">
+          <div></div>
+          <span id="btn2"></span>
+        </div>
+      </div>
+    </li>
+    <li>家庭 <span id="title3">0</span>
+      <div class="scale_panel">
+        <span class="r">100</span>0
+        <div class="scale" id="bar3">
+          <div></div>
+          <span id="btn3"></span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</body>
+<script>
+scale = function(btn, bar, title) {
+  this.btn = document.getElementById(btn);
+  this.bar = document.getElementById(bar);
+  this.title = document.getElementById(title);
+  this.step = this.bar.getElementsByTagName("DIV")[0];
+  this.init();
+};
+scale.prototype = {
+  init: function() {
+    var f = this,
+      g = document,
+      b = window,
+      m = Math;
+    f.btn.onmousedown = function(e) {
+      var x = (e || b.event).clientX;
+      var l = this.offsetLeft;
+      var max = f.bar.offsetWidth - this.offsetWidth;
+      g.onmousemove = function(e) {
+        var thisX = (e || b.event).clientX;
+        var to = m.min(max, m.max(-2, l + (thisX - x)));
+        f.btn.style.left = to + 'px';
+        f.ondrag(m.round(m.max(0, to / max) * 100), to);
+        b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+      };
+      g.onmouseup = new Function('this.onmousemove=null');
+    };
+  },
+  ondrag: function(pos, x) {
+    this.step.style.width = Math.max(0, x) + 'px';
+    this.title.innerHTML = pos + '%';
+  }
+}
+new scale('btn', 'bar', 'title');
+new scale('btn2', 'bar2', 'title2');
+new scale('btn3', 'bar3', 'title3');
+</script>
+
+</html>
