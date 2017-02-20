@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="(i,n) in audioList">
-        <p @click="fill(n)">{{ i }}</p>
+        <p @click="fill(n)">{{ i.name }}+{{i.pl}}</p>
       </li>
     </ul>
   </div>
