@@ -30,8 +30,10 @@ export default {
       if (audio !== null) {
         if (!audio.paused) {
           audio.pause()
+          document.title = '='
         } else {
           audio.play()
+          document.title = '▶'
         }
       }
     },
@@ -40,6 +42,7 @@ export default {
     },
     apts () {
       this.apt = this.$refs.player.duration
+      document.title = '▶'
     },
     yl () {
       this.$refs.player.muted = !this.$refs.player.muted
