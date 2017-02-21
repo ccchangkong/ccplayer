@@ -5,6 +5,8 @@
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
+     <slider></slider>
+     <slider></slider>
       <player></player>
       <nav>
      <router-link to='/search'>search</router-link>
@@ -27,12 +29,14 @@
 <script>
 import Player from './components/player.vue'
 import Buttons from './components/button.vue'
+import Slider from './components/slider.vue'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
   name: 'app',
   components: {
     Player,
-    Buttons
+    Buttons,
+    Slider
   },
   data () {
     return {
