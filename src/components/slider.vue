@@ -4,7 +4,7 @@
         <span class="r">100</span>0
         <div class="scale" id="bar" ref="bar">
           <div ref="step"></div>
-          <span id="btn" ref="btn" @mousedown='btndown' :class='{Act:flag}'>    
+          <span id="btn" ref="btn" @mousedown='btndown' :class='{Act:flag}'@touchstart="btnth">    
              <!--@touchstart="handleTouchStart" @touchend="handleTouchEnd" @touchcancel="handleTouchEnd"       -->
           </span>
         </div>
@@ -29,7 +29,7 @@ export default {
     btndown (e) {
       this.x = (e || window.event).clientX
       this.l = this.$refs.btn.offsetLeft
-      this.max = this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth
+      this.max = this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
       this.flag = true
       document.addEventListener('mousemove', this.btnmove)
       document.addEventListener('mouseup', this.btnup)
@@ -38,7 +38,7 @@ export default {
       // window.alert(1)
       let m = Math
       let thisX = (e || window.event).clientX
-      let to = m.min(this.max, m.max(-2, this.l + (thisX - this.x)))
+      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (thisX - this.x)))
       this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
       window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
@@ -49,9 +49,31 @@ export default {
       document.removeEventListener('mouseup', this.btnup)
     },
     ondrag (pos, x) {
+      this.$refs.title.innerHTML = pos + '%'
       this.$refs.btn.style.left = x + 'px'
       this.$refs.step.style.width = Math.max(0, x) + 'px'
-      this.$refs.title.innerHTML = pos + '%'
+    },
+    btnth (e) {
+      this.x = (e || window.event).touches[0].clientX
+      this.l = this.$refs.btn.offsetLeft
+      this.max = this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
+      this.flag = true
+      document.addEventListener('touchmove', this.btnthmove)
+      document.addEventListener('touchend', this.btnthup)
+    },
+    btnthmove (e) {
+      // window.alert(1)
+      let m = Math
+      let thisX = (e || window.event).touches[0].clientX
+      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (thisX - this.x)))
+      this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
+      // window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
+    },
+    btnthup () {
+      // window.alert(2)
+      this.flag = false
+      document.removeEventListener('touchmove', this.btnthmove)
+      document.removeEventListener('touchend', this.btnthup)
     }
   }
 }
@@ -78,7 +100,7 @@ export default {
     width: 8px;
     height: 8px;
     position: absolute;
-    left: -2px;
+    left: -4px;
     top: -1px;
     cursor: pointer;
         border-radius: 50%;
