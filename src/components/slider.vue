@@ -19,17 +19,22 @@ export default {
     return {
       x: '',
       l: '',
-      max: '',
       flag: false
     }
   },
   computed: {
+    max () {
+      return this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
+    }
   },
   methods: {
+    tTo (m, x) {
+      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (x - this.x)))
+      this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
+    },
     btndown (e) {
       this.x = (e || window.event).clientX
       this.l = this.$refs.btn.offsetLeft
-      this.max = this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
       this.flag = true
       document.addEventListener('mousemove', this.btnmove)
       document.addEventListener('mouseup', this.btnup)
@@ -38,8 +43,7 @@ export default {
       // window.alert(1)
       let m = Math
       let thisX = (e || window.event).clientX
-      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (thisX - this.x)))
-      this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
+      this.tTo(m, thisX)
       window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     btnup () {
@@ -56,7 +60,6 @@ export default {
     btnth (e) {
       this.x = (e || window.event).touches[0].clientX
       this.l = this.$refs.btn.offsetLeft
-      this.max = this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
       this.flag = true
       document.addEventListener('touchmove', this.btnthmove)
       document.addEventListener('touchend', this.btnthup)
@@ -65,8 +68,7 @@ export default {
       // window.alert(1)
       let m = Math
       let thisX = (e || window.event).touches[0].clientX
-      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (thisX - this.x)))
-      this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
+      this.tTo(m, thisX)
       // window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     btnthup () {
