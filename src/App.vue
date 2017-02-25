@@ -5,8 +5,9 @@
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
-     <slider></slider>
-     <slider></slider>
+     <slider v-model="sliderValue"></slider>
+     <!--<slider v-model="sliderValue"></slider>-->
+     <!--<slider></slider>-->
       <player></player>
       <nav>
      <router-link to='/search'>search</router-link>
@@ -40,6 +41,7 @@ export default {
   },
   data () {
     return {
+      sliderValue: 50
     }
   },
   computed: {

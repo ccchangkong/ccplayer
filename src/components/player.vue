@@ -3,7 +3,7 @@
     <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls autoplay loop></audio>
     <button @click='yl'>音量</button>
     <button @click="togglePanel">播放暂停</button>
-    <p>{{pt | time}}/{{apt | time}}</p>
+    <p>{{pt | time}}/{{apt | time}}={{this.bfb}}%</p>
   </div>
 </template>
 <script>
@@ -12,14 +12,16 @@ export default {
   name: 'player',
   data () {
     return {
-      pt: '',
-      apt: ''
+      pt: 0,
+      apt: 0,
+      flag: false
     }
   },
   computed: {
-    // pt: () => {
-    //   this.$refs.player.currentTime
-    // },
+    bfb () {
+      let a = this.apt === 0 ? 0 : Math.round((this.pt / this.apt) * 100)
+      return a
+    },
     ...mapState([
       'audio'
     ])
@@ -38,10 +40,14 @@ export default {
       }
     },
     pts () {
-      this.pt = this.$refs.player.currentTime
+      if (this.flag) {
+        this.pt = this.$refs.player.currentTime
+      }
     },
     apts () {
-      this.apt = this.$refs.player.duration
+      if (this.flag) {
+        this.apt = this.$refs.player.duration
+      }
       document.title = '▶'
     },
     yl () {

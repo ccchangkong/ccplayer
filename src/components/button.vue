@@ -35,7 +35,7 @@ export default {
           data['data']['song']['list'].forEach(
             e => {
               let es = e['f'].split('|')
-              console.log(es)
+              // console.log(es)
               self.audioList.push({id: es[0], name: es[1], pl: es[3], pic: es[4]})
               // 尺寸只有300,500
             }

@@ -1,36 +1,62 @@
 <template>
-  <div class="test">爱情<span id="title" ref="title">0</span>
-      <div class="scale_panel">
-        <span class="r">100</span>0
-        <div class="scale" id="bar" ref="bar">
-          <div ref="step"></div>
-          <span id="btn" ref="btn" @mousedown='btndown' :class='{Act:flag}'@touchstart="btnth">    
-             <!--@touchstart="handleTouchStart" @touchend="handleTouchEnd" @touchcancel="handleTouchEnd"       -->
+  <div class="slider">
+    {{inputValue}}
+        <div class="slider-track" id="bar" ref="bar" @click.self='btnclick'>
+          <div ref="step" class="slider-fill"></div>
+          <span class="slider-thumb" id="btn" ref="btn" @mousedown.stop='btndown' @touchstart.stop="btnth">    
           </span>
         </div>
-      </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'test',
+  name: 'slider',
+  props: {
+    value: {
+      type: [Number, String],
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 100
+    }
+  },
   data () {
     return {
       x: '',
       l: '',
-      flag: false
+      flag: false,
+      inputValue: this.value
     }
   },
   computed: {
-    max () {
-      return this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
+    width () {
+      return this.inputValue * (this.$refs.bar.offsetWidth / this.max) - this.$refs.btn.offsetWidth / 2
+    },
+    stepWidth () {
+      return Math.max(0, this.width)
     }
+    // bfb () {
+    //   return {
+    //     backgroundImage: `linear-gradient(90deg, blue, blue ${this.stepWidth}px, red ${this.stepWidth}px)`
+    //     // backgroundImage: `linear-gradient(90deg, blue, blue 50px, red 50px)`
+    //   }
+    // }
+  },
+  mounted () {
+    this.$refs.btn.style.left = this.width + 'px'
+    this.$refs.step.style.width = this.stepWidth + 'px'
   },
   methods: {
-    tTo (m, x) {
-      let to = m.min(this.max, m.max(-this.$refs.btn.offsetWidth / 2, this.l + (x - this.x)))
-      this.ondrag(m.round(m.max(0, to / this.max) * 100), to)
+    btnclick (e) {
+      let x = e.clientX - this.$refs.bar.offsetLeft
+      this.inputValue = Math.round((x / this.$refs.bar.offsetWidth) * 100)
+      // var y = e.clientY - this.$refs.bar.offsetTop
+      console.log(111)
+    },
+    maxW () {
+      return this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
     },
     btndown (e) {
       this.x = (e || window.event).clientX
@@ -52,10 +78,9 @@ export default {
       document.removeEventListener('mousemove', this.btnmove)
       document.removeEventListener('mouseup', this.btnup)
     },
-    ondrag (pos, x) {
-      this.$refs.title.innerHTML = pos + '%'
-      this.$refs.btn.style.left = x + 'px'
-      this.$refs.step.style.width = Math.max(0, x) + 'px'
+    tTo (m, x) {
+      let w = m.min(this.maxW(), m.max(-this.$refs.btn.offsetWidth / 2, this.l + (x - this.x)))
+      this.inputValue = m.round(m.max(0, w / this.maxW()) * 100)
     },
     btnth (e) {
       this.x = (e || window.event).touches[0].clientX
@@ -69,7 +94,6 @@ export default {
       let m = Math
       let thisX = (e || window.event).touches[0].clientX
       this.tTo(m, thisX)
-      // window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     btnthup () {
       // window.alert(2)
@@ -77,53 +101,53 @@ export default {
       document.removeEventListener('touchmove', this.btnthmove)
       document.removeEventListener('touchend', this.btnthup)
     }
+  },
+  watch: {
+    inputValue (val) {
+      this.$emit('input', val)
+      this.$emit('change', val)
+      this.$refs.btn.style.left = this.width + 'px'
+      this.$refs.step.style.width = this.stepWidth + 'px'
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  .scale_panel {
+  .slider {
     font-size: 12px;
-    color: #999;
+    line-height: 50px;
+    position: relative;
+    height: 50px;
     width: 200px;
-    position: absolute;
-    line-height: 18px;
-    left: 60px;
-    top: -0px;
+    list-style: none;
   }
-
-  .scale_panel .r {
-    float: right;
-  }
-
-  .scale span {
+  .slider-thumb {
     background-color: black;
-    width: 8px;
-    height: 8px;
+    width: 16px;
+    height: 16px;
     position: absolute;
-    left: -4px;
-    top: -1px;
+    left: -8px;
+    top: -5px;
     cursor: pointer;
         border-radius: 50%;
-        transform: scale(2);
+        /*transform: scale(2);*/
         transition: 0.5s box-shadow;
 
   }
-.scale span.Act{
+.slider-thumb.Act{
 box-shadow: 0 0 5px #333;
 }
-  .scale {
+  .slider-track {
     background: red;
-    border-left: 1px #83BBD9 solid;
-    border-right: 1px red solid;
-    width: 200px;
     height: 5px;
     position: relative;
     font-size: 0px;
+    cursor: pointer;
   }
 
-  .scale div {
+  .slider-fill {
     background-color: blue;
     position: absolute;
     height: 5px;
@@ -132,12 +156,6 @@ box-shadow: 0 0 5px #333;
     bottom: 0;
   }
 
-  .test {
-    font-size: 12px;
-    line-height: 50px;
-    position: relative;
-    height: 50px;
-    list-style: none;
-  }
+
 
 </style>
