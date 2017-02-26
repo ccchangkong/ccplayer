@@ -1,9 +1,9 @@
 <template>
   <div class="slider">
     {{inputValue}}
-        <div class="slider-track" id="bar" ref="bar" @click.self='btnclick'>
+        <div class="slider-track"  ref="bar" @click.self='btnclick'>
           <div ref="step" class="slider-fill"></div>
-          <span class="slider-thumb" id="btn" ref="btn" @mousedown.stop='btndown' @touchstart.stop="btnth">    
+          <span class="slider-thumb"  ref="btn" @mousedown='btndown' @touchstart="btnth">    
           </span>
         </div>
   </div>
@@ -53,7 +53,6 @@ export default {
       let x = e.clientX - this.$refs.bar.offsetLeft
       this.inputValue = Math.round((x / this.$refs.bar.offsetWidth) * 100)
       // var y = e.clientY - this.$refs.bar.offsetTop
-      console.log(111)
     },
     maxW () {
       return this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
