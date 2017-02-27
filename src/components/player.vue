@@ -1,25 +1,37 @@
 <template>
   <div id="player">    
     <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls autoplay loop></audio>
-    <button @click='yl'>音量</button>
-    <button @click="togglePanel">播放暂停</button>
-    <p>{{pt | time}}/{{apt | time}}={{this.bfb}}%</p>
+   <!--<p>={{sliderValue}}%{{sValue}}</p>-->
+   <p>{{pt | time}}<slider v-model="sValue" style="display: inline-block"></slider>{{apt | time}}</p>
+    <i class="material-icons"@click='yl'>volume_up</i>
+    <i class="material-icons">volume_off</i>
+    <i class="material-icons">skip_previous</i>
+    <!--<i @click="togglePanel">▶〓</i>-->
+    <i class="material-icons" @click="togglePanel">play_arrow</i>
+    <i class="material-icons">pause</i>
+    <i class="material-icons">skip_next</i>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
+import Slider from './slider.vue'
 export default {
   name: 'player',
+  components: {
+    Slider
+  },
   data () {
     return {
       pt: 0,
       apt: 0,
-      flag: false
+      flag: false,
+      sValue: 0
     }
   },
   computed: {
-    bfb () {
+    sliderValue () {
       let a = this.apt === 0 ? 0 : Math.round((this.pt / this.apt) * 100)
+      this.sValue = a
       return a
     },
     ...mapState([
@@ -32,7 +44,8 @@ export default {
       if (audio !== null) {
         if (!audio.paused) {
           audio.pause()
-          document.title = '='
+          document.title = '▣〓'
+          this.flag = !this.flag
         } else {
           audio.play()
           document.title = '▶'
@@ -40,14 +53,10 @@ export default {
       }
     },
     pts () {
-      if (this.flag) {
-        this.pt = this.$refs.player.currentTime
-      }
+      this.pt = this.$refs.player.currentTime
     },
     apts () {
-      if (this.flag) {
-        this.apt = this.$refs.player.duration
-      }
+      this.apt = this.$refs.player.duration
       document.title = '▶'
     },
     yl () {
@@ -75,6 +84,6 @@ export default {
 </script>
 <style scoped>
 audio{
-  /*display: none;*/
+  display: none;
 }
 </style>

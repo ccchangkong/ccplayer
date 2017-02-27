@@ -1,9 +1,9 @@
 <template>
-  <div class="slider">
-    {{inputValue}}
-        <div class="slider-track"  ref="bar" @click.self='btnclick'>
+  <div class="slider" style="display: inline-block">
+    <!--{{inputValue}}-->
+        <div class="slider-track"  ref="bar" @click='btnclick'>
           <div ref="step" class="slider-fill"></div>
-          <span class="slider-thumb"  ref="btn" @mousedown='btndown' @touchstart="btnth">    
+          <span class="slider-thumb"  ref="btn" @mousedown='btndown' @touchstart="btnth" :class='{Act:flag}'>    
           </span>
         </div>
   </div>
@@ -50,7 +50,9 @@ export default {
   },
   methods: {
     btnclick (e) {
-      let x = e.clientX - this.$refs.bar.offsetLeft
+      // let x = Math.min(this.maxW(), e.clientX - this.$refs.bar.offsetLeft)
+      // console.log(e.clientX, this.$refs.bar.offsetLeft)
+      let x = e.clientX - this.$refs.bar.getBoundingClientRect().left
       this.inputValue = Math.round((x / this.$refs.bar.offsetWidth) * 100)
       // var y = e.clientY - this.$refs.bar.offsetTop
     },
@@ -102,6 +104,9 @@ export default {
     }
   },
   watch: {
+    value (val) {
+      this.inputValue = val
+    },
     inputValue (val) {
       this.$emit('input', val)
       this.$emit('change', val)
@@ -115,12 +120,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   .slider {
-    font-size: 12px;
-    line-height: 50px;
     position: relative;
-    height: 50px;
+    height: 16px;
     width: 200px;
     list-style: none;
+    display: inline-block;
+vertical-align: middle;
   }
   .slider-thumb {
     background-color: black;
@@ -135,7 +140,7 @@ export default {
         transition: 0.5s box-shadow;
 
   }
-.slider-thumb.Act{
+.slider-thumb.Act,.slider-thumb:hover{
 box-shadow: 0 0 5px #333;
 }
   .slider-track {

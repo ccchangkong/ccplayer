@@ -2,26 +2,26 @@
   <div id="app">
      <!--<p>{{$store.getters.bb}}</p>
      <p>{{aa}}</p>  -->
+     <Lianyi></Lianyi>
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
-     <slider v-model="sliderValue"></slider>
      <!--<slider v-model="sliderValue"></slider>-->
      <!--<slider></slider>-->
       <player></player>
-      <nav>
+      <!--<nav>
      <router-link to='/search'>search</router-link>
      <router-link to='/hot'>hot</router-link> 
      <router-link to='/history'>history</router-link>    
      <router-link to='/list'>list</router-link> 
-      </nav>
-      <div class="a-view">
+      </nav>-->
+      <section class="a-view">
       <keep-alive >
         <!--<transition>-->
           <router-view ></router-view>
           <!--</transition>-->
         </keep-alive> 
-      </div>
+      </section>
        
     <input type="text" v-model="audio.keyWord">
     <Buttons></Buttons>
@@ -30,18 +30,17 @@
 <script>
 import Player from './components/player.vue'
 import Buttons from './components/button.vue'
-import Slider from './components/slider.vue'
+import Lianyi from './components/lianyi.vue'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
   name: 'app',
   components: {
     Player,
     Buttons,
-    Slider
+    Lianyi
   },
   data () {
     return {
-      sliderValue: 50
     }
   },
   computed: {
@@ -77,6 +76,9 @@ html {
         font-size: calc(100% + 2 * (100vw - 375px) / 39);
         font-size: calc(16px + 2 * (100vw - 375px) / 39);
     }
+    header {
+      height: 50%; 
+    }
 }
 @media screen and (min-width: 414px) {
     html {
@@ -108,10 +110,11 @@ html {
   /*margin-top: 60px;*/
   height: 100vh;
   overflow: hidden; 
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  height: 30%;
   background:
           linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
           background-blend-mode: screen;
