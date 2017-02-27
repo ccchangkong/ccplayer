@@ -1,20 +1,17 @@
 <template>
   <div id="app">
-     <!--<p>{{$store.getters.bb}}</p>
-     <p>{{aa}}</p>  -->
-     <Lianyi></Lianyi>
+     <!--<Lianyi></Lianyi>-->
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
-     <!--<slider v-model="sliderValue"></slider>-->
-     <!--<slider></slider>-->
+     <main>
       <player></player>
-      <!--<nav>
+      <nav>
      <router-link to='/search'>search</router-link>
      <router-link to='/hot'>hot</router-link> 
      <router-link to='/history'>history</router-link>    
      <router-link to='/list'>list</router-link> 
-      </nav>-->
+      </nav>
       <section class="a-view">
       <keep-alive >
         <!--<transition>-->
@@ -22,9 +19,12 @@
           <!--</transition>-->
         </keep-alive> 
       </section>
-       
-    <input type="text" v-model="audio.keyWord">
-    <Buttons></Buttons>
+     </main>
+
+      <footer>
+        <Buttons></Buttons>
+      </footer>
+    
   </div>
 </template>
 <script>
@@ -70,6 +70,13 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+ul{
+  margin: 0;
+  padding: 0;
+}
+  li{
+    list-style: none;
+  }
 @media screen and (min-width: 375px) {
     html {
         /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
@@ -77,8 +84,29 @@ html {
         font-size: calc(16px + 2 * (100vw - 375px) / 39);
     }
     header {
-      height: 50%; 
+      flex: 0 0 50%;
     }
+    footer {
+      flex: 0 0 90px;
+      background-color: #eee;
+    }
+    main {
+      flex: auto;
+      /*overflow-y: scroll;*/
+      display: flex;
+      flex-direction: column
+    }
+    nav {
+  flex: 0 0 24px;
+}
+#player {
+  flex: 0 0 65px;
+}
+.a-view {
+  /*height: 20%;*/
+  flex: auto;
+  overflow: scroll; 
+}
 }
 @media screen and (min-width: 414px) {
     html {
@@ -129,16 +157,5 @@ header {
 .a-img {
   /*height: 100%;*/
   width: 100%;
-}
-nav {
-  height: 5%;
-}
-#player {
-  height: 10%;
-}
-.a-view {
-  height: 20%;
-  overflow: hidden;
-  overflow-y: scroll;
 }
 </style>

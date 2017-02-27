@@ -1,8 +1,8 @@
 <template>
   <div id="player">    
-    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls autoplay loop></audio>
+    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop>autoplay</audio>
    <!--<p>={{sliderValue}}%{{sValue}}</p>-->
-   <p>{{pt | time}}<slider v-model="sValue" style="display: inline-block"></slider>{{apt | time}}</p>
+   <p>{{audio.currentLength | time}}<slider v-model="sliderValue" @changeEvent='test'></slider>{{apt | time}}</p>
     <i class="material-icons"@click='yl'>volume_up</i>
     <i class="material-icons">volume_off</i>
     <i class="material-icons">skip_previous</i>
@@ -22,16 +22,13 @@ export default {
   },
   data () {
     return {
-      pt: 0,
       apt: 0,
-      flag: false,
-      sValue: 0
+      flag: false
     }
   },
   computed: {
     sliderValue () {
-      let a = this.apt === 0 ? 0 : Math.round((this.pt / this.apt) * 100)
-      this.sValue = a
+      let a = this.apt === 0 ? 0 : Math.round((this.audio.currentLength / this.apt) * 100)
       return a
     },
     ...mapState([
@@ -53,7 +50,7 @@ export default {
       }
     },
     pts () {
-      this.pt = this.$refs.player.currentTime
+      this.audio.currentLength = this.$refs.player.currentTime
     },
     apts () {
       this.apt = this.$refs.player.duration
@@ -61,6 +58,11 @@ export default {
     },
     yl () {
       this.$refs.player.muted = !this.$refs.player.muted
+    },
+    test (val) {
+      // this.$refs.player.pause()
+      this.$refs.player.currentTime = this.$refs.player.duration * val / 100
+      // this.$nextTick(() => this.$refs.player.play())
     }
   },
   filters: {

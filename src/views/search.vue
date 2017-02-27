@@ -1,16 +1,21 @@
 <template>
   <div>
+    <SearchBtn></SearchBtn>
     <ul>
       <li v-for="(i,n) in audioList">
-        <p @click="fill(n)">{{ i.name }}+{{i.pl}}</p>
+        <p @click="fill(n)">{{ i.title }}+{{i.singer}}</p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import SearchBtn from '../components/searchBtn.vue'
   import { mapGetters, mapState } from 'vuex'
   export default {
+    components: {
+      SearchBtn
+    },
     data () {
       return {
       }
@@ -28,8 +33,9 @@
     },
     methods: {
       fill (f, w = 500) {
-        this.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${this.audioList[f].id}.m4a?fromtag=46`
-        this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${this.audioList[f].pic % 100}/${w}_albumpic_${this.audioList[f].pic}_0.jpg`
+        this.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${this.audioList[f].songId}.m4a?fromtag=46`
+        this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${this.audioList[f].imgId % 100}/${w}_albumpic_${this.audioList[f].imgId}_0.jpg`
+        this.audio.singer = this.audioList[f].singer
         // this.$nextTick(function () {
         //   this.$refs.player.play()
         // })
@@ -79,3 +85,6 @@
     }
   }
 </script>
+<style>
+
+</style>

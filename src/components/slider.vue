@@ -55,6 +55,7 @@ export default {
       let x = e.clientX - this.$refs.bar.getBoundingClientRect().left
       this.inputValue = Math.round((x / this.$refs.bar.offsetWidth) * 100)
       // var y = e.clientY - this.$refs.bar.offsetTop
+      this.changeEvent()
     },
     maxW () {
       return this.$refs.bar.offsetWidth - this.$refs.btn.offsetWidth / 2
@@ -78,10 +79,14 @@ export default {
       this.flag = false
       document.removeEventListener('mousemove', this.btnmove)
       document.removeEventListener('mouseup', this.btnup)
+      this.changeEvent()
     },
     tTo (m, x) {
       let w = m.min(this.maxW(), m.max(-this.$refs.btn.offsetWidth / 2, this.l + (x - this.x)))
       this.inputValue = m.round(m.max(0, w / this.maxW()) * 100)
+    },
+    changeEvent () {
+      this.$emit('changeEvent', this.inputValue)
     },
     btnth (e) {
       this.x = (e || window.event).touches[0].clientX
@@ -101,6 +106,7 @@ export default {
       this.flag = false
       document.removeEventListener('touchmove', this.btnthmove)
       document.removeEventListener('touchend', this.btnthup)
+      this.changeEvent()
     }
   },
   watch: {
@@ -135,14 +141,13 @@ vertical-align: middle;
     left: -8px;
     top: -5px;
     cursor: pointer;
-        border-radius: 50%;
-        /*transform: scale(2);*/
-        transition: 0.5s box-shadow;
-
+    border-radius: 50%;
+    transition: 0.5s box-shadow;
   }
-.slider-thumb.Act,.slider-thumb:hover{
-box-shadow: 0 0 5px #333;
-}
+.slider-thumb:hover,
+  .slider-thumb.Act {
+     box-shadow: 0 0 5px #333;
+  }
   .slider-track {
     background: red;
     height: 5px;
