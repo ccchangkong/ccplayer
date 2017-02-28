@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div v-for="(item,index) in list">
-<p>{{item.id}}{{item.sn}}{{item.ai}}</p>
-    </div>
+    <ul>
+      <li v-for="(item,index) in list">
+        <p @click="fill(item)">{{item.songId}}{{item.title}}{{item.imgId}}</p>
+        </li>
+    </ul>
     
   </div>
 </template>
 
 <script>
   import $ from 'jquery'
+  import { mapMutations } from 'vuex'
   export default {
     data () {
       return {
@@ -26,14 +29,11 @@
         jsonpCallback: "JsonCallback",
         scriptCharset: 'GBK', // 设置编码，否则会乱码
         success: function (data) {
-          // self.list = data.songlist
           data.songlist.forEach(
             e => {
-              self.list.push({id: e.id, sn: e.songName, ai: e.albumId})
-              // self.audioList.push({id: es[0], pic: es[4]})
+              self.list.push({songId: e.id, title: e.songName, singer: e.singerName, imgId: e.albumId})
             }
           )
-          // console.log()
         },
         error: function () {
           console.log('fail')
@@ -41,6 +41,9 @@
       })
     },
     methods: {
+      ...mapMutations([
+        'fill'
+      ])
     }
   }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div id="player">    
-    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop>autoplay</audio>
+    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop autoplay></audio>
    <!--<p>={{sliderValue}}%{{sValue}}</p>-->
-   <p>{{audio.currentLength | time}}<slider v-model="sliderValue" @changeEvent='test'></slider>{{apt | time}}</p>
-    <i class="material-icons"@click='yl'>volume_up</i>
-    <i class="material-icons">volume_off</i>
+   <p><i class="material-icons"@click='yl'>{{volValue}}</i>{{audio.currentLength | time}}<slider v-model="sliderValue" @changeEvent='currentChange'></slider>{{apt | time}}</p> 
     <i class="material-icons">skip_previous</i>
-    <!--<i @click="togglePanel">▶〓</i>-->
-    <i class="material-icons" @click="togglePanel">play_arrow</i>
-    <i class="material-icons">pause</i>
+    <i class="material-icons" @click="togglePanel">{{playValue}}</i>
     <i class="material-icons">skip_next</i>
+    <div class="audioPlay">
+      <p>{{audio.title}}</p>
+      <p>{{audio.singer}}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       apt: 0,
-      flag: false
+      volFlag: true
     }
   },
   computed: {
@@ -31,20 +31,26 @@ export default {
       let a = this.apt === 0 ? 0 : Math.round((this.audio.currentLength / this.apt) * 100)
       return a
     },
+    volValue () {
+      return this.volFlag ? 'volume_up' : 'volume_off'
+    },
+    playValue () {
+      return this.audio.currentFlag ? 'pause' : 'play_arrow'
+    },
     ...mapState([
       'audio'
     ])
   },
   methods: {
     togglePanel () {
-      let audio = this.$refs.player
-      if (audio !== null) {
-        if (!audio.paused) {
-          audio.pause()
-          document.title = '▣〓'
-          this.flag = !this.flag
+      let player = this.$refs.player
+      if (player !== null) {
+        this.audio.currentFlag = !this.audio.currentFlag
+        if (!player.paused) {
+          player.pause()
+          document.title = '〓'
         } else {
-          audio.play()
+          player.play()
           document.title = '▶'
         }
       }
@@ -57,9 +63,10 @@ export default {
       document.title = '▶'
     },
     yl () {
-      this.$refs.player.muted = !this.$refs.player.muted
+      this.volFlag = !this.volFlag
+      // this.$refs.player.muted = !this.$refs.player.muted
     },
-    test (val) {
+    currentChange (val) {
       // this.$refs.player.pause()
       this.$refs.player.currentTime = this.$refs.player.duration * val / 100
       // this.$nextTick(() => this.$refs.player.play())
@@ -78,14 +85,30 @@ export default {
       }
       return minute + ':' + second
     }
+  },
+  watch: {
+    volFlag (val) {
+      this.$refs.player.muted = !val
+    }
   }
-  // components: {
-  //   Hello
-  // }
 }
 </script>
 <style scoped>
 audio{
   display: none;
+}
+#player{
+position: relative;
+}
+.audioPlay{
+  position: absolute;
+  top: -3em;;
+  left: 0;
+  height: 3em;
+  width: 100%;
+  padding: 0.5em 2em;
+  text-align: left;
+  background-color: #4a4a4a;
+  background-color:rgba(74,74,74,0.9);
 }
 </style>

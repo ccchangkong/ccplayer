@@ -1,9 +1,9 @@
 <template>
   <div>
-    <SearchBtn></SearchBtn>
+    <SearchBtn v-model="list"></SearchBtn>
     <ul>
-      <li v-for="(i,n) in audioList">
-        <p @click="fill(n)">{{ i.title }}+{{i.singer}}</p>
+      <li v-for="(i,n) in list">
+        <p @click="fill(i)"><span>{{ i.title }}</span><span>{{i.singer}}</span></p>
       </li>
     </ul>
   </div>
@@ -11,13 +11,14 @@
 
 <script>
   import SearchBtn from '../components/searchBtn.vue'
-  import { mapGetters, mapState } from 'vuex'
+  import { mapGetters, mapState, mapMutations } from 'vuex'
   export default {
     components: {
       SearchBtn
     },
     data () {
       return {
+        list: []
       }
     },
     created () {
@@ -27,64 +28,40 @@
         // ...
       ]),
       ...mapState([
-        'audio',
-        'audioList'
+        'audio'
       ])
     },
     methods: {
-      fill (f, w = 500) {
-        this.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${this.audioList[f].songId}.m4a?fromtag=46`
-        this.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${this.audioList[f].imgId % 100}/${w}_albumpic_${this.audioList[f].imgId}_0.jpg`
-        this.audio.singer = this.audioList[f].singer
-        // this.$nextTick(function () {
-        //   this.$refs.player.play()
-        // })
-      }
-      // getList(){
-      //   Indicator.open({
-      //     text: '加载中...',
-      //     spinnerType: 'fading-circle'
-      //   });
-      //   this.$http.get('http://cs003.m2828.com/demo/searchIT/proxy.php?val=&url1=http://mobilecdn.kugou.com/api/v3/search/hot?plat=0&count=30&url2=').then((res)=>{
-      //     var list=JSON.parse(res.data).data.info;
-      //     this.hotList= [...list.map(({keyword})=>keyword)];
-      //     Indicator.close();
-      //   })
-      // },
-      // replaceInput(index){
-      //   this.keyword=this.hotList[index];
-      //   this.search()
-      // },
-      // search(){
-      //   this.togglePanel=false;
-      //   Indicator.open({
-      //     text: '加载中...',
-      //     spinnerType: 'snake'
-      //   });
-      //   this.$http.get('http://cs003.m2828.com/demo/searchIT/proxy.php?val=&url1=http://mobilecdn.kugou.com/api/v3/search/song?keyword='+this.keyword+'&page=1&pagesize=30&url2=').then((res)=>{
-      //     var list=JSON.parse(res.data).data.info;
-      //     this.total=JSON.parse(res.data).data.total
-      //     this.songList= [...list.map(
-      //       ({filename,hash})=>({filename,hash})
-      //     )];
-      //     Indicator.close();
-      //   })
-      // },
-      // playAudio(index){
-      //   this.$store.commit("toggleAudioLoadding");
-      //   this.$http.get('http://cs003.m2828.com/phps/getKugouSong.php?hash='+this.songList[index].hash).then((res)=>{
-      //     var songUrl=JSON.parse(res.data).url;
-      //     var imgUrl=JSON.parse(res.data).imgUrl.split('{size}').join('100');
-      //     var title=JSON.parse(res.data).songName;
-      //     var singer=JSON.parse(res.data).choricSinger;
-      //     var audio={songUrl,imgUrl,title,singer}
-      //     this.$store.commit("toggleAudioLoadding");
-      //     this.$store.commit('setAudio',audio);
-      //   })
-      // }
+      ...mapMutations([
+        'fill' // 映射 this.increment() 为 this.$store.commit('increment')
+      ])
     }
   }
 </script>
-<style>
-
+<style scoped>
+ul{
+  padding: 1em 0;
+}
+li{
+  line-height: 2em;
+  height: 2em;
+  padding: 0 1em;
+}
+p{
+  display: flex; 
+  justify-content: space-between;
+  text-overflow:ellipsis;
+   white-space:nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+p span{
+  flex: 0 1 10em;
+}
+p span:first{
+  text-align: right;
+}
+/*p span:last-child{
+  text-align: right;
+}*/
 </style>

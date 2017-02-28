@@ -128,13 +128,13 @@ export default {
   .slider {
     position: relative;
     height: 16px;
-    width: 200px;
+    width: 15em;
     list-style: none;
     display: inline-block;
 vertical-align: middle;
   }
   .slider-thumb {
-    background-color: black;
+    background-color: #fdfdfd;
     width: 16px;
     height: 16px;
     position: absolute;
@@ -149,7 +149,7 @@ vertical-align: middle;
      box-shadow: 0 0 5px #333;
   }
   .slider-track {
-    background: red;
+    background: #9d9d9d;
     height: 5px;
     position: relative;
     font-size: 0px;
@@ -157,7 +157,7 @@ vertical-align: middle;
   }
 
   .slider-fill {
-    background-color: blue;
+    background-color: #fdfdfd;
     position: absolute;
     height: 5px;
     width: 0;

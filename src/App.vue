@@ -1,37 +1,33 @@
 <template>
-  <div id="app">
+  <div id="app" :class='{Act:view.openFlag}' @click='test'>
      <!--<Lianyi></Lianyi>-->
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
      <main>
       <player></player>
-      <nav>
-     <router-link to='/search'>search</router-link>
-     <router-link to='/hot'>hot</router-link> 
-     <router-link to='/history'>history</router-link>    
-     <router-link to='/list'>list</router-link> 
-      </nav>
       <section class="a-view">
+      <nav>
+          <router-link to='/search'>搜索</router-link>
+          <router-link to='/hot'>热榜</router-link> 
+          <router-link to='/list'>新歌</router-link> 
+          <router-link to='/history'>历史</router-link>    
+      </nav>
       <keep-alive >
-        <!--<transition>-->
           <router-view ></router-view>
-          <!--</transition>-->
         </keep-alive> 
       </section>
      </main>
-
       <footer>
         <Buttons></Buttons>
-      </footer>
-    
+      </footer>  
   </div>
 </template>
 <script>
 import Player from './components/player.vue'
 import Buttons from './components/button.vue'
 import Lianyi from './components/lianyi.vue'
-import { mapGetters, mapState, mapMutations } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'app',
   components: {
@@ -48,17 +44,14 @@ export default {
       // ...
     ]),
     ...mapState([
-      'audio'
+      'audio',
+      'view'
     ])
   },
   methods: {
-    ...mapMutations([
-      'test' // 映射 this.increment() 为 this.$store.commit('increment')
-    ])
+    test () {
+    }
   }
-  // created () {
-  //   this.$router.go('')
-  // }
 }
 </script>
 <style>
@@ -70,43 +63,103 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-ul{
+ul,
+p{
   margin: 0;
   padding: 0;
 }
-  li{
-    list-style: none;
+li{
+  list-style: none;
+}
+  a{
+    color:#222;
+    text-decoration:none;
+    outline:none;
+    cursor:pointer;
+    }
+a:link,
+a:visited,
+a:hover,
+a:focus{
+  text-decoration:none;
   }
+#app {
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;*/
+  text-align: center;
+  color: #2c3e50;
+  /*margin-top: 60px;*/
+  height: 100vh;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex: 0 0 50%;
+  background: linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
+  background-blend-mode: screen;
+  overflow: hidden;
+  transition: .5s;
+}
+/*header:hover {
+  height: 50%;
+  max-height: 100vw;
+}*/
+.a-img {
+  /*height: 100%;*/
+  width: 100%;
+}
+main {
+  flex: auto;
+  /*overflow-y: scroll;*/
+  display: flex;
+  flex-direction: column;
+  background-color: #4a4a4a;
+  color: #f5f5f5;
+}
+main li{
+  border-bottom: 2px solid #f0f0f0; 
+}
+footer {
+  flex: 0 0 2em;
+  background-color: #4a4a4a;
+  color:#f5f5f5;
+  
+}
+nav {
+  flex: 0 0 1.5em;
+  display: flex;
+  padding: 0 5em;
+}
+nav a{
+  flex: auto;
+}
+#app #player {
+  height: 100%;
+  transition: .5s height;
+}
+#app.Act #player {
+  flex: 0 0 3em;
+}
+section {
+  flex:0 0 0;
+  overflow: hidden;
+  background-color: #f6f6f6;
+  color: #9a9a9a;
+  transition: .5s;
+}
+#app.Act section {
+  flex: auto;
+  overflow: scroll; 
+  
+}
 @media screen and (min-width: 375px) {
     html {
         /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
         font-size: calc(100% + 2 * (100vw - 375px) / 39);
         font-size: calc(16px + 2 * (100vw - 375px) / 39);
     }
-    header {
-      flex: 0 0 50%;
-    }
-    footer {
-      flex: 0 0 90px;
-      background-color: #eee;
-    }
-    main {
-      flex: auto;
-      /*overflow-y: scroll;*/
-      display: flex;
-      flex-direction: column
-    }
-    nav {
-  flex: 0 0 24px;
-}
-#player {
-  flex: 0 0 65px;
-}
-.a-view {
-  /*height: 20%;*/
-  flex: auto;
-  overflow: scroll; 
-}
 }
 @media screen and (min-width: 414px) {
     html {
@@ -129,33 +182,6 @@ ul{
         font-size: calc(22px + 6 * (100vw - 1000px) / 1000);
     }
 }
-#app {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;*/
-  text-align: center;
-  color: #2c3e50;
-  /*margin-top: 60px;*/
-  height: 100vh;
-  overflow: hidden; 
-  display: flex;
-  flex-direction: column;
-}
 
-header {
-  background:
-          linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
-          background-blend-mode: screen;
-  overflow: hidden;
-  transition: .5s;
-  
-}
-/*header:hover {
-  height: 50%;
-  max-height: 100vw;
-}*/
-.a-img {
-  /*height: 100%;*/
-  width: 100%;
-}
+
 </style>

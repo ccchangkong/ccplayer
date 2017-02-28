@@ -1,8 +1,8 @@
 <template>
-  <div>
-      <input type="text" v-model="audio.keyWord">
-    <i class="material-icons"@click='ajax'>search</i>
-  </div>
+    <div class="text-field">
+      <i class="material-icons"@click='ajax'>search</i>
+        <input type="text" v-model="audio.keyWord">
+    </div>      
 </template>
 
 <script>
@@ -10,8 +10,14 @@ import $ from 'jquery'
 import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'SearchBtn',
+  props: {
+    value: {
+      default: []
+    }
+  },
   data () {
     return {
+      list: this.value
     }
   },
   computed: {
@@ -19,13 +25,12 @@ export default {
       // ...
     ]),
     ...mapState([
-      'audio',
-      'audioList'
+      'audio'
     ])
   },
   methods: {
     ajax () {
-      this.audioList.length = 0
+      this.list.length = 0
       this.$nextTick(() => {
         let self = this
         let num = 10
@@ -36,18 +41,50 @@ export default {
             e => {
               let es = e['f'].split('|')
               // console.log(es)
-              self.audioList.push({songId: es[0], title: es[1], singer: es[3], imgId: es[4]})
+              self.list.push({songId: es[0], title: es[1], singer: es[3], imgId: es[4]})
               // 尺寸只有300,500
             }
           )
         })
       })
     }
+  },
+  watch: {
+    value (val) {
+      this.list = val
+    },
+    list (val) {
+      this.$emit('input', val)
+      this.$emit('change', val)
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+.text-field{
+position: relative;
+}
+input{
+  border: none;
+  outline: none;
+  background-color: inherit;
+  
+}
+.text-field::after{
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  /*background-color: #fdfdfd;*/
+  background-color: #333;
+  transition: .5s;
+  transform: translateX(-50%);
+}
+.text-field:hover::after{
+  width: 100%;
+}
 </style>
