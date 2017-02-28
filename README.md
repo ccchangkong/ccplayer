@@ -1,5 +1,7 @@
 # ccplayer
 
+[demo](http://www.vastskycc.com/ccplayer/index.html)
+
 > A Vue.js project
 
 ## Build Setup

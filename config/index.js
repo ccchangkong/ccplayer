@@ -22,13 +22,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/fcgi-bin': {
-            target: 'http://s.music.qq.com',
-            changeOrigin: true,
-            pathRewrite: {
-                '^/fcgi-bin': '/fcgi-bin'
-    }
+      '/fcgi-bin': {
+        target: 'http://s.music.qq.com',
+        changeOrigin: true,
+        pathRewrite: {
+           '^/fcgi-bin': '/fcgi-bin'
         }
+      }
+      // '/proxy': {
+      //   target: 'http://www.vastskycc.com',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //      '^/proxy': '/proxy'
+      //   }
+      // }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

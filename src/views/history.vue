@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
   export default {
     data () {
       return {
@@ -23,6 +23,9 @@
     created () {
     },
     methods: {
+      ...mapMutations([
+        'fill'
+      ])
     }
   }
 </script>
