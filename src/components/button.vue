@@ -1,7 +1,6 @@
 <template>
   <div class="bottomBtn">
     <i class="material-icons" @click='changeOpen'>list</i>
-    <p>{{view.openFlag}}</p>
     <i class="material-icons" style="color: #9a9a9a;font-size: 2em;">arrow_drop_down</i>
     <i class="material-icons">more_horiz</i>
   </div>

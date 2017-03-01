@@ -151,7 +151,7 @@ section {
 }
 #app.Act section {
   flex: auto;
-  overflow: scroll; 
+  overflow-y:scroll; 
   
 }
 @media screen and (min-width: 375px) {
