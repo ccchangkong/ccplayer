@@ -36,6 +36,6 @@ export default {
   height: 100%;
 }
 i{
-  margin: 0 1em;
+  margin: 0 1rem;
 }
 </style>

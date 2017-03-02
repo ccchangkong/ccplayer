@@ -40,12 +40,12 @@
 </script>
 <style scoped>
 ul{
-  padding: 1em 0;
+  padding: 1rem 0;
 }
 li{
-  line-height: 2em;
-  height: 2em;
-  padding: 0 1em;
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0 1rem;
 }
 p{
   display: flex; 
@@ -56,7 +56,7 @@ p{
   text-align: center;
 }
 p span{
-  flex: 0 1 10em;
+  flex: 0 1 10rem;
 }
 p span:first{
   text-align: right;

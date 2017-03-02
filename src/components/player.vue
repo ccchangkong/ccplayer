@@ -102,11 +102,11 @@ position: relative;
 }
 .audioPlay{
   position: absolute;
-  top: -3em;;
+  top: -3rem;;
   left: 0;
-  height: 3em;
+  height: 3rem;
   width: 100%;
-  padding: 0.5em 2em;
+  padding: 0.5rem 2rem;
   text-align: left;
   background-color: #4a4a4a;
   background-color:rgba(74,74,74,0.9);

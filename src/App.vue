@@ -122,15 +122,15 @@ main li{
   border-bottom: 2px solid #f0f0f0; 
 }
 footer {
-  flex: 0 0 2em;
+  flex: 0 0 2rem;
   background-color: #4a4a4a;
   color:#f5f5f5;
   
 }
 nav {
-  flex: 0 0 1.5em;
+  flex: 0 0 1.5rem;
   display: flex;
-  padding: 0 5em;
+  padding: 0 5rem;
 }
 nav a{
   flex: auto;
@@ -140,7 +140,7 @@ nav a{
   transition: .5s height;
 }
 #app.Act #player {
-  flex: 0 0 3em;
+  flex: 0 0 3rem;
 }
 section {
   flex:0 0 0;

@@ -128,7 +128,7 @@ export default {
   .slider {
     position: relative;
     height: 16px;
-    width: 15em;
+    width: 15rem;
     list-style: none;
     display: inline-block;
 vertical-align: middle;
