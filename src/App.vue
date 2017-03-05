@@ -96,11 +96,15 @@ a:focus{
   flex-direction: column;
 }
 header {
-  flex: 0 0 50%;
+  flex: 0 0 55%;
   background: linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
   background-blend-mode: screen;
   overflow: hidden;
   transition: .5s;
+}
+#app.Act header {
+  flex: 0 0 40%;
+  filter: blur(2px);
 }
 /*header:hover {
   height: 50%;
@@ -136,18 +140,31 @@ nav a{
   flex: auto;
 }
 #app #player {
-  height: 100%;
+  flex: auto;
   transition: .5s height;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
 }
 #app.Act #player {
   flex: 0 0 3rem;
+  flex-direction: row;
 }
 section {
   flex:0 0 0;
   overflow: hidden;
-  background-color: #f6f6f6;
+  background-color: inherit;
   color: #9a9a9a;
+  opacity: 0;
   transition: .5s;
+  transform: translate3d(0, 0, 0);
+  /*will-change: opacity,background-color;*/
+  /*filter: blur(0.2rem);  */
+}
+#app.Act section {
+  opacity: 1;
+  background-color: #f6f6f6;
+  /*filter: blur(0);*/
 }
 #app.Act section {
   flex: auto;

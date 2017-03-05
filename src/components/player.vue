@@ -2,11 +2,19 @@
   <div id="player">    
     <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop autoplay></audio>
    <!--<p>={{sliderValue}}%{{sValue}}</p>-->
-   <p><i class="material-icons"@click='yl'>{{volValue}}</i>{{audio.currentLength | time}}<slider v-model="sliderValue" @changeEvent='currentChange'></slider>{{apt | time}}</p> 
-    <i class="material-icons">skip_previous</i>
-    <i class="material-icons" @click="togglePanel">{{playValue}}</i>
-    <i class="material-icons">skip_next</i>
-    <div class="audioPlay">
+   
+   <!--<i class="material-icons"@click='yl'>{{volValue}}</i>-->
+   <div class="a-slider">
+    <p v-show='!view.openFlag' class="a-slider-p">{{audio.currentLength | time}}</p>
+    <div class="a-slider-box"><slider v-model="sliderValue" @changeEvent='currentChange'></slider></div> 
+     <p v-show='!view.openFlag' class="a-slider-p">{{apt | time}}</p>
+   </div>
+   <div class="a-btn">
+    <i class="material-icons a-btn-i">skip_previous</i>
+    <i class="material-icons a-btn-i" @click="togglePanel">{{playValue}}</i>
+    <i class="material-icons a-btn-i">skip_next</i>
+    </div>
+    <div class="a-play" v-show='!view.openFlag'>
       <p>{{audio.title}}</p>
       <p>{{audio.singer}}</p>
     </div>
@@ -38,7 +46,8 @@ export default {
       return this.audio.currentFlag ? 'pause' : 'play_arrow'
     },
     ...mapState([
-      'audio'
+      'audio',
+      'view'
     ])
   },
   methods: {
@@ -64,7 +73,7 @@ export default {
     },
     yl () {
       this.volFlag = !this.volFlag
-      // this.$refs.player.muted = !this.$refs.player.muted
+      this.$refs.player.muted = !this.$refs.player.muted
     },
     currentChange (val) {
       // this.$refs.player.pause()
@@ -85,30 +94,53 @@ export default {
       }
       return minute + ':' + second
     }
-  },
-  watch: {
-    volFlag (val) {
-      this.$refs.player.muted = !val
-    }
   }
+  // watch: {
+  //   volFlag (val) {
+  //     this.$refs.player.muted = !val
+  //   }
+  // }
 }
 </script>
-<style scoped>
+<style>
 audio{
   display: none;
 }
 #player{
 position: relative;
+line-height: 3rem;
 }
-.audioPlay{
+.a-play{
   position: absolute;
   top: -3rem;;
   left: 0;
   height: 3rem;
+  line-height: 1.5rem;  
   width: 100%;
-  padding: 0.5rem 2rem;
+  padding: 0 1rem;
+  font-size: 0.8rem;
   text-align: left;
   background-color: #4a4a4a;
   background-color:rgba(74,74,74,0.9);
+}
+.a-slider{
+  display: flex;
+  justify-content: space-around;
+  flex: 1 0 70%;
+}
+.a-slider-box{
+  width: 75%;
+  padding: 0 1.5rem;
+}
+.a-slider-p{
+ font-size: 1rem;
+}
+.a-btn{
+ flex:auto;
+  font-size: 0; 
+}
+.a-btn-i{
+  line-height: 3rem;  
+  font-size: 1.5rem;
 }
 </style>

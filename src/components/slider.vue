@@ -72,7 +72,6 @@ export default {
       let m = Math
       let thisX = (e || window.event).clientX
       this.tTo(m, thisX)
-      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     btnup () {
       // window.alert(2)
@@ -84,6 +83,7 @@ export default {
     tTo (m, x) {
       let w = m.min(this.maxW(), m.max(-this.$refs.btn.offsetWidth / 2, this.l + (x - this.x)))
       this.inputValue = m.round(m.max(0, w / this.maxW()) * 100)
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     changeEvent () {
       this.$emit('changeEvent', this.inputValue)
@@ -128,10 +128,12 @@ export default {
   .slider {
     position: relative;
     height: 16px;
-    width: 15rem;
+    /*width: 15rem;*/
+    width: 100%;
     list-style: none;
     display: inline-block;
-vertical-align: middle;
+    vertical-align: middle;
+    margin: 0.2rem 0 0;
   }
   .slider-thumb {
     background-color: #fdfdfd;
@@ -144,7 +146,7 @@ vertical-align: middle;
     border-radius: 50%;
     transition: 0.5s box-shadow;
   }
-.slider-thumb:hover,
+  .slider-thumb:hover,
   .slider-thumb.Act {
      box-shadow: 0 0 5px #333;
   }
@@ -164,7 +166,4 @@ vertical-align: middle;
     left: 0;
     bottom: 0;
   }
-
-
-
 </style>
