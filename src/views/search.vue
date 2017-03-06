@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="a-view">
     <SearchBtn v-model="list"></SearchBtn>
-    <ul>
-      <li v-for="(i,n) in list">
-        <p @click="fill(i)"><span>{{ i.title }}</span><span>{{i.singer}}</span></p>
+    <ul class="view-ul">
+      <li v-for="(i,n) in list" class="view-li">
+        <p @click="fill(i)" class="view-p"><span class="view-p-title">{{ i.title }}</span><span class="view-p-singer">{{i.singer}}</span></p>
       </li>
     </ul>
   </div>
@@ -38,29 +38,7 @@
     }
   }
 </script>
-<style scoped>
-ul{
-  padding: 1rem 0;
-}
-li{
-  line-height: 2rem;
-  height: 2rem;
-  padding: 0 1rem;
-}
-p{
-  display: flex; 
-  justify-content: space-between;
-  text-overflow:ellipsis;
-   white-space:nowrap;
-  overflow: hidden;
-  text-align: center;
-}
-p span{
-  flex: 0 1 10rem;
-}
-p span:first{
-  text-align: right;
-}
+<style>
 /*p span:last-child{
   text-align: right;
 }*/

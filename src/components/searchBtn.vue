@@ -1,7 +1,7 @@
 <template>
     <div class="text-field">
       <i class="material-icons"@click='ajax'>search</i>
-        <input type="text" v-model="audio.keyWord">
+        <input type="text" v-model="audio.keyWord" @keyup.enter='ajax'>
     </div>      
 </template>
 
@@ -72,6 +72,8 @@ input{
   border: none;
   outline: none;
   background-color: inherit;
+  text-align: center;
+  line-height: 2rem;
   
 }
 .text-field::after{
@@ -82,11 +84,13 @@ input{
   height: 2px;
   width: 0;
   /*background-color: #fdfdfd;*/
-  background-color: #333;
+  /*background-color: #000;*/
   transition: .5s;
   transform: translateX(-50%);
 }
 .text-field:hover::after{
-  width: 100%;
+  width: 30rem;
+  max-width: 100%;
+  background-color: #333;
 }
 </style>

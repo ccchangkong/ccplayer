@@ -141,23 +141,72 @@ main {
   background-color: #4a4a4a;
   color: #f5f5f5;
 }
-main li{
-  border-bottom: 2px solid #f0f0f0; 
+section {
+  flex:0 0 0;
+  display: flex;
+  flex-direction: column;
+  background-color: inherit;
+  color: #9a9a9a;
+  opacity: 0;
+  transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translate3d(0, 0, 0);
+  overflow: hidden;
+  /*will-change: opacity,background-color;*/
+  /*filter: blur(0.2rem);  */
+}
+#app.Act section {
+  opacity: 1;
+  background-color: #f6f6f6;
+  /*filter: blur(0);*/
+  flex: auto; 
+}
+nav {
+  flex: 0 0 2rem;
+  display: flex;
+  line-height: 2rem;
+  padding: 0 10%;
+}
+nav a{
+  flex: auto;
+  text-shadow: 3px 3px 10px rgba(174, 174, 174, 0.8);
+}
+nav a:nth-of-type(2){
+  text-shadow:3px 3px 10px rgba(187, 97, 155, 0.8);
+}
+section .a-view{
+  overflow-y: scroll;
+}
+.view-ul{
+ 
+}
+.view-li{
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0 1rem;
+   border-bottom: 2px solid #f0f0f0; 
+}
+.view-p{
+  display: flex; 
+  justify-content: space-between;
+  text-overflow:ellipsis;
+   white-space:nowrap;
+  overflow: hidden;
+  text-align: left;
+}
+.view-p-title,
+.view-p-singer{
+  flex: 0 1 10rem;
+}
+.view-p-title{
+  text-align: left;
 }
 footer {
-  flex: 0 0 2rem;
+  flex: 0 0 3rem;
   background-color: #4a4a4a;
   color:#f5f5f5;
   
 }
-nav {
-  flex: 0 0 1.5rem;
-  display: flex;
-  padding: 0 5rem;
-}
-nav a{
-  flex: auto;
-}
+
 #app #player {
   flex: auto;
   transition: 1s height;
@@ -169,26 +218,7 @@ nav a{
   flex: 0 0 3rem;
   flex-direction: row;
 }
-section {
-  flex:0 0 0;
-  overflow: hidden;
-  background-color: inherit;
-  color: #9a9a9a;
-  opacity: 0;
-  transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
-  transform: translate3d(0, 0, 0);
-  /*will-change: opacity,background-color;*/
-  /*filter: blur(0.2rem);  */
-}
-#app.Act section {
-  opacity: 1;
-  background-color: #f6f6f6;
-  /*filter: blur(0);*/
-}
-#app.Act section {
-  flex: auto;
-  overflow-y:scroll; 
-}
+
 @media screen and (min-width: 375px) {
     html {
         /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */

@@ -37,7 +37,7 @@ export default {
   /*margin: auto;*/
   position: absolute;
   background-color: transparent;
-  box-shadow: 0 0 15px #e5e5e5;
+  /*box-shadow: 0 0 15px #e5e5e5;*/
   transition: 0.5s;
   z-index: 0;
   overflow: hidden;
@@ -59,7 +59,8 @@ export default {
   background-position-y: 0;
   box-shadow: 0 0 10px #e5e5e5 inset;
   height: 30%;
-  transition: 0.5s;  
+  transition: 0.5s;
+  border-radius: .2rem / .2rem .2rem 0 0;
 }
 .about-header:hover{
   background-position-y: 50%;
@@ -67,5 +68,7 @@ export default {
 .about-main{
   background-color: #fff;
   height: 70%;
+  border-radius: .2rem / 0 0 .2rem .2rem;
+  
 }
 </style>

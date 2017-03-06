@@ -1,5 +1,5 @@
 <template>
-  <div id="player">    
+  <div id="player" :class='{Act:view.openFlag}'>    
     <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop autoplay></audio>
    <!--<p>={{sliderValue}}%{{sValue}}</p>-->
    
@@ -126,6 +126,9 @@ line-height: 3rem;
 .a-slider{
   display: flex;
   justify-content: space-around;
+  flex: 0 0 3rem;
+}
+#player.Act .a-slider{
   flex: 1 0 70%;
 }
 .a-slider-box{
@@ -136,11 +139,24 @@ line-height: 3rem;
  font-size: 1rem;
 }
 .a-btn{
- flex:auto;
+  flex:auto;
   font-size: 0; 
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+#player.Act .a-btn{
+
 }
 .a-btn-i{
-  line-height: 3rem;  
+  line-height: 6rem;  
+  font-size: 3rem;
+}
+.a-btn-i:nth-of-type(2){
+  font-size: 5rem;
+}
+#player.Act .a-btn-i{
+  line-height: 2;  
   font-size: 1.5rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bottomBtn">
+  <div class="bottomBtn":class='{Act:view.openFlag}'>
     <i class="material-icons" @click='changeOpen'v-show='!view.openFlag'>list</i>
     <i class="material-icons" style="color: #9a9a9a;font-size: 2rem;"v-show='view.openFlag' @click='changeOpen'>arrow_drop_down</i>
     <i class="material-icons" @click='changeAbout' v-show='!view.openFlag'>more_horiz</i>
@@ -34,10 +34,17 @@ export default {
 <style scoped>
 .bottomBtn{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   /*align-items: center;*/
   height: 100%;
+  padding: 0 3rem;
+  
+}
+.bottomBtn.Act{
+  justify-content: space-around;
 }
 i{
+  font-size: 2rem;
+  line-height: 3rem;
 }
 </style>
