@@ -1,10 +1,10 @@
 <template>
-  <div id="app" :class='{Act:view.openFlag}' @click='test'>
+  <div id="app" :class='{Act:view.openFlag}'>
      <!--<Lianyi></Lianyi>-->
      <header>
      <img :src="audio.imgUrl" alt="" class="a-img">
      </header>
-     <main>
+     <main  @touchstart="appTh">
       <player></player>
       <section class="a-view">
       <nav>
@@ -20,12 +20,14 @@
      </main>
       <footer>
         <Buttons></Buttons>
-      </footer>  
+      </footer>
+      <About></About>
   </div>
 </template>
 <script>
 import Player from './components/player.vue'
 import Buttons from './components/button.vue'
+import About from './components/about.vue'
 import Lianyi from './components/lianyi.vue'
 import { mapGetters, mapState } from 'vuex'
 export default {
@@ -33,10 +35,12 @@ export default {
   components: {
     Player,
     Buttons,
+    About,
     Lianyi
   },
   data () {
     return {
+      y: 0
     }
   },
   computed: {
@@ -49,7 +53,20 @@ export default {
     ])
   },
   methods: {
-    test () {
+    appTh (e) {
+      this.y = (e || window.event).touches[0].clientY
+      document.addEventListener('touchmove', this.appThmove)
+      document.addEventListener('touchend', this.appThup)
+    },
+    appThmove (e) {
+      let Y = (e || window.event).touches[0].clientY
+      if ((this.y - Y) > 50) {
+      }
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
+    },
+    appThup (e) {
+      document.removeEventListener('touchmove', this.appThmove)
+      document.removeEventListener('touchend', this.appThup)
     }
   }
 }
@@ -91,9 +108,11 @@ a:focus{
   color: #2c3e50;
   /*margin-top: 60px;*/
   height: 100vh;
+  width: 100vw;
   overflow: hidden; 
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 header {
   flex: 0 0 55%;
@@ -141,7 +160,7 @@ nav a{
 }
 #app #player {
   flex: auto;
-  transition: .5s height;
+  transition: 1s height;
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
@@ -156,7 +175,7 @@ section {
   background-color: inherit;
   color: #9a9a9a;
   opacity: 0;
-  transition: .5s;
+  transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
   transform: translate3d(0, 0, 0);
   /*will-change: opacity,background-color;*/
   /*filter: blur(0.2rem);  */
@@ -169,7 +188,6 @@ section {
 #app.Act section {
   flex: auto;
   overflow-y:scroll; 
-  
 }
 @media screen and (min-width: 375px) {
     html {

@@ -5,7 +5,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     view: {
-      openFlag: true
+      openFlag: true,
+      aboutFlag: false
     },
     audio: {
       songUrl: '',
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
       state.audio.singer = f.singer
       state.audio.currentFlag = true
       state.historyList.push(f)
+      state.view.openFlag = false
     }
   }
 })

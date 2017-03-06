@@ -129,7 +129,7 @@ line-height: 3rem;
   flex: 1 0 70%;
 }
 .a-slider-box{
-  width: 75%;
+  width: 100%;
   padding: 0 1.5rem;
 }
 .a-slider-p{

@@ -68,13 +68,11 @@ export default {
       document.addEventListener('mouseup', this.btnup)
     },
     btnmove (e) {
-      // window.alert(1)
       let m = Math
       let thisX = (e || window.event).clientX
       this.tTo(m, thisX)
     },
     btnup () {
-      // window.alert(2)
       this.flag = false
       document.removeEventListener('mousemove', this.btnmove)
       document.removeEventListener('mouseup', this.btnup)

@@ -89,7 +89,8 @@ module.exports = {
       require('autoprefixer')({
         browsers: ['last 2 versions']
       })
-    ]
+    ],
+    preserveWhitespace: false
   },
   externals: {
     jquery: 'window.$'

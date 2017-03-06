@@ -2,7 +2,7 @@
   <div class="bottomBtn">
     <i class="material-icons" @click='changeOpen'v-show='!view.openFlag'>list</i>
     <i class="material-icons" style="color: #9a9a9a;font-size: 2rem;"v-show='view.openFlag' @click='changeOpen'>arrow_drop_down</i>
-    <i class="material-icons" v-show='!view.openFlag'>more_horiz</i>
+    <i class="material-icons" @click='changeAbout' v-show='!view.openFlag'>more_horiz</i>
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
   methods: {
     changeOpen () {
       this.view.openFlag = !this.view.openFlag
+    },
+    changeAbout () {
+      this.view.aboutFlag = !this.view.aboutFlag
     }
   }
 }
