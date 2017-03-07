@@ -6,7 +6,7 @@
      </header>
      <main  @touchstart="appTh">
       <player></player>
-      <section class="a-view">
+      <section>
       <nav>
           <router-link to='/search'>搜索</router-link>
           <router-link to='/hot'>热榜</router-link> 
@@ -148,7 +148,7 @@ section {
   background-color: inherit;
   color: #9a9a9a;
   opacity: 0;
-  transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: 1s;
   transform: translate3d(0, 0, 0);
   overflow: hidden;
   /*will-change: opacity,background-color;*/
@@ -166,9 +166,15 @@ nav {
   line-height: 2rem;
   padding: 0 10%;
 }
+.router-link-active{
+    border-bottom: 0.2rem solid #737373;
+}
 nav a{
   flex: auto;
   text-shadow: 3px 3px 10px rgba(174, 174, 174, 0.8);
+  transition: .5s;
+   margin: 0 0.5rem;
+   border-bottom: 0.1rem solid inherit;
 }
 nav a:nth-of-type(2){
   text-shadow:3px 3px 10px rgba(187, 97, 155, 0.8);
