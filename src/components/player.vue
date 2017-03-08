@@ -10,9 +10,9 @@
      <p v-show='!view.openFlag' class="a-slider-p">{{apt | time}}</p>
    </div>
    <div class="a-btn">
-    <i class="material-icons a-btn-i">skip_previous</i>
+    <i class="material-icons a-btn-i"@click='prev'>skip_previous</i>
     <i class="material-icons a-btn-i" @click="togglePanel">{{playValue}}</i>
-    <i class="material-icons a-btn-i">skip_next</i>
+    <i class="material-icons a-btn-i"@click='next'>skip_next</i>
     </div>
     <div class="a-play" v-show='!view.openFlag'>
       <p>{{audio.title}}</p>
@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import Slider from './slider.vue'
 export default {
   name: 'player',
@@ -57,10 +57,10 @@ export default {
         this.audio.currentFlag = !this.audio.currentFlag
         if (!player.paused) {
           player.pause()
-          document.title = '〓'
+          document.title = `ccplayer`
         } else {
           player.play()
-          document.title = '▶'
+          document.title = `▶ - ${this.audio.title} ccplayer`
         }
       }
     },
@@ -69,7 +69,7 @@ export default {
     },
     apts () {
       this.apt = this.$refs.player.duration
-      document.title = '▶'
+      document.title = `▶ - ${this.audio.title} ccplayer`
     },
     yl () {
       this.volFlag = !this.volFlag
@@ -79,7 +79,11 @@ export default {
       // this.$refs.player.pause()
       this.$refs.player.currentTime = this.$refs.player.duration * val / 100
       // this.$nextTick(() => this.$refs.player.play())
-    }
+    },
+    ...mapMutations([
+      'prev',
+      'next'
+    ])
   },
   filters: {
     time (value) {

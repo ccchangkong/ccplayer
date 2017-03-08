@@ -1,5 +1,5 @@
 <template>
-  <div class="about"  v-show='view.aboutFlag' @click='changeAbout'>
+  <div class="about"  :class='{Act:view.aboutFlag}' @click='changeAbout'>
     <div class="about-header"></div>
     <div class="about-main">
       <p>cc长空制作&J.Su设计</p>
@@ -30,19 +30,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-.about{
+.about.Act{
   height: 100%;
   width: 100%;
+  font-size: 1rem;
+  opacity: 1;
+}
+.about{
+width: 0;
+height: 0;
   padding: 6rem 3rem 10rem;
   /*margin: auto;*/
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: transparent;
   /*box-shadow: 0 0 15px #e5e5e5;*/
   transition: 0.5s;
   z-index: 0;
   overflow: hidden;
+  font-size: 0;
+  opacity: 0;
 }
-.about::before{
+.about.Act::before{
   content: '';
   position: absolute;
   width: 200vw;

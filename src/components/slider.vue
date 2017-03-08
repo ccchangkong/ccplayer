@@ -3,7 +3,7 @@
     <!--{{inputValue}}-->
         <div class="slider-track"  ref="bar" @click='btnclick'>
           <div ref="step" class="slider-fill"></div>
-          <span class="slider-thumb"  ref="btn" @mousedown='btndown' @touchstart="btnth" :class='{Act:flag}'>    
+          <span class="slider-thumb"  ref="btn" @mousedown='btndown' @touchstart.stop="btnth" :class='{Act:flag}'>    
           </span>
         </div>
   </div>

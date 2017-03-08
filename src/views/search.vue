@@ -3,7 +3,7 @@
     <SearchBtn v-model="list"></SearchBtn>
     <ul class="view-ul">
       <li v-for="(i,n) in list" class="view-li">
-        <p @click="fill(i)" class="view-p"><span class="view-p-title">{{ i.title }}</span><span class="view-p-singer">{{i.singer}}</span></p>
+        <p @click="fill({list,n})" class="view-p"><span class="view-p-title">{{ i.title }}</span><span class="view-p-singer">{{i.singer}}</span></p>
       </li>
     </ul>
   </div>

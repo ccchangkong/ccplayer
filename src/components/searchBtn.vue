@@ -93,4 +93,9 @@ input{
   max-width: 100%;
   background-color: #333;
 }
+i{
+      line-height: 2rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
 </style>

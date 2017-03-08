@@ -60,8 +60,13 @@ export default {
     },
     appThmove (e) {
       let Y = (e || window.event).touches[0].clientY
-      if ((this.y - Y) > 50) {
+      let d = this.y - Y
+      if (d > 50) {
+        this.view.openFlag = true
       }
+      // else if (d < -50) {
+      //   this.view.openFlag = false
+      // }
       window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
     },
     appThup (e) {
