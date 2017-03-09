@@ -146,8 +146,8 @@ line-height: 3rem;
   flex:auto;
   font-size: 0; 
   display: flex;
-  align-self: center;
   align-items: center;
+  justify-content: center;
 }
 #player.Act .a-btn{
 

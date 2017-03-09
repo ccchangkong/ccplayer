@@ -196,6 +196,9 @@ section .a-view{
   padding: 0 1rem;
    border-bottom: 2px solid #f0f0f0; 
 }
+.view-li:nth-child(2n) {
+    background-color: #dedede;
+}
 .view-p{
   display: flex; 
   justify-content: space-between;
