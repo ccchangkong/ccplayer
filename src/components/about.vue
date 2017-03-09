@@ -31,37 +31,46 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
 .about.Act{
-  height: 100%;
-  width: 100%;
+
   font-size: 1rem;
   opacity: 1;
+ transform:translate(-50%, -50%) scale(1);
+  
 }
 .about{
-width: 0;
-height: 0;
-  padding: 6rem 3rem 10rem;
+  /*width: 0;
+  height: 0;*/
+    height: 30rem;
+  width: 40rem;
+  max-width: 80%;
+  max-height: 80%;
+  /*padding: 6rem 3rem 10rem;*/
   /*margin: auto;*/
   position: absolute;
-  top: 0;
+  /*top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 0;*/
+  left: 50%;
+  top: 50%;
   background-color: transparent;
   /*box-shadow: 0 0 15px #e5e5e5;*/
   transition: 0.5s;
   z-index: 0;
   overflow: hidden;
   font-size: 0;
+  transform:translate(-50%, -50%) scale(0);
   opacity: 0;
+
 }
 .about.Act::before{
+     border: 100vw solid rgba(74,74,74,0.8);
   content: '';
   position: absolute;
   width: 200vw;
   height: 200vh;
   top: -50%;
   left:-50%;
-  background-color: rgba(74,74,74,0.8);
   z-index: -1;
 }
 .about-header{
