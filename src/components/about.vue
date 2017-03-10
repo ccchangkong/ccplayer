@@ -1,13 +1,17 @@
 <template>
-  <div class="about"  :class='{Act:view.aboutFlag}' @click='changeAbout'>
+  <div class="about"  :class='{Act:view.aboutFlag}' @click.self='changeAbout'>
     <div class="about-box">
-      <div class="about-header">ccplayer</div>
+      <div class="about-header">Cc.Player</div>
       <div class="about-main">
-        <p>cc长空制作&J.Su设计</p>
-        <a href="http://weibo.com/u/1820064530" target="_blank"><span class="about-main-icon">微博</span></a>
-        <a href="http://www.vastskycc.com/"target="_blank"><span class="about-main-icon">博客</span></a>
-        <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=agkCBgVaBSobG0QJBQc"target="_blank"><span class="about-main-icon">邮箱</span></a>
-        <p>V 1.0.0</p>
+        <p class="about-main-title">cc长空制作&J.Su设计</p>
+        <img src="../pic/ac.png" alt="" class="about-main-pic">
+        <div class="about-main-icons">
+          <a href="http://weibo.com/u/1820064530" target="_blank"><span class="about-main-icon">微博</span></a>
+          <a href="http://www.vastskycc.com/"target="_blank"><span class="about-main-icon">博客</span></a>
+          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=agkCBgVaBSobG0QJBQc"target="_blank"><span class="about-main-icon">邮箱</span></a>
+        </div>
+        <p class="about-main-ver">Ver 1.0.0</p>
+        <i class="material-icons close-btn"@click.self='changeAbout'>clear</i>
       </div>
     </div>
   </div>
@@ -51,9 +55,7 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: transparent;
   transition: 0.5s;
-  z-index: 0;
   overflow: hidden;
   display: none;
 }
@@ -62,6 +64,8 @@ export default {
   width: 40rem;
   max-width: 80%;
   max-height: 80%;
+  box-shadow: 0 0 10rem #aaa;
+  overflow: hidden;
 }
 
 .about-header{
@@ -86,8 +90,26 @@ export default {
 }
 .about-main{
   background-color: #fff;
+  background-image: linear-gradient(135deg,#d8d8d8, #fff);
   height: 70%;
-  border-radius: .2rem / 0 0 .2rem .2rem;
+  border-radius: .3rem / 0 0 .3rem .3rem;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.about-main-pic{
+  width: 110px;
+  height: 95px;
+  margin-bottom: 2rem;
+  /*border-radius: 10%;
+  box-shadow: 0 0 0.5rem #aaa;*/
+}
+.about-main-title{
+  font-size: 1.5rem;
+  line-height: 2.5;
+  padding-bottom: 2rem;
 }
 .about-main-icon{
   font-size: 0.8rem;
@@ -95,11 +117,41 @@ export default {
   margin: 0 1em;
   padding:0.1rem 0.5rem;
   border: 0.1rem solid #4a4a4a;
-  border-radius: 10%;
+  border-radius: 15%/0 0 25% 0;
   transition: 0.3s;
-}
-.about-main-icon:hover{
   background-color: #4a4a4a;
   color: #fff;
+}
+.about-main-icon:hover{
+  background-color: inherit;
+  color: rgb(34,34,34);
+}
+.about-main-ver{
+  flex: auto;
+  align-items: flex-end;
+  display: flex;
+  align-self: center;
+  font-size: 0.8rem;
+  color: #9a9a9a;
+}
+.close-btn{
+  position: absolute;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #aaa;
+  text-align: right;
+  padding-top: .2rem;
+  width: 2rem;
+  height: 2rem;
+  right: 0;
+  bottom: 0;
+  background-color: #5a5a5a;
+  border-radius: 100% 0 0 0;
+  transition: .5s;
+  box-shadow:  0 0 1rem #aaa;
+}
+.close-btn:hover{
+  color: #5a5a5a;
+  background-color: #aaa;
 }
 </style>

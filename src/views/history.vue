@@ -1,8 +1,7 @@
 <template>
   <div class="a-view">
     <ul class="view-ul">
-      <!--<li v-if="historyList.length = 0">没有记录哟~</li>-->
-      <li v-for="(i,n) in historyList" class="view-li">
+      <li v-for="(i,n) in list" class="view-li">
         <p @click="fill({list,n})" class="view-p"><span class="view-p-title">{{ i.title }}</span><span class="view-p-singer">{{i.singer}}</span></p>
       </li>
     </ul>
@@ -17,6 +16,9 @@
       }
     },
     computed: {
+      list () {
+        return this.historyList
+      },
       ...mapState([
         'historyList'
       ])

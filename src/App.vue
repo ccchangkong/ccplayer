@@ -175,9 +175,9 @@ nav {
 nav a{
   flex: auto;
   text-shadow: 3px 3px 10px rgba(174, 174, 174, 0.8);
-  transition: .5s;
+  transition: .3s;
    margin: 0 0.5rem;
-   border-bottom: 0.1rem solid inherit;
+   border-bottom: 0.1rem solid transparent;
 }
 nav a:nth-of-type(2){
   text-shadow:3px 3px 10px rgba(187, 97, 155, 0.8);

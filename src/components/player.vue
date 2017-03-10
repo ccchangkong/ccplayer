@@ -54,13 +54,14 @@ export default {
     togglePanel () {
       let player = this.$refs.player
       if (player.src !== '') {
-        this.audio.currentFlag = !this.audio.currentFlag
         if (!player.paused) {
           player.pause()
           document.title = `ccplayer`
+          this.audio.currentFlag = false
         } else {
           player.play()
           document.title = `▶ - ${this.audio.title} ccplayer`
+          this.audio.currentFlag = true
         }
       }
     },

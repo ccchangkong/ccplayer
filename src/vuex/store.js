@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {unique} from '../utils/utils.js'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -37,6 +38,7 @@ const store = new Vuex.Store({
       state.audio.currentFlag = true
       state.audio.currentFlag = true
       state.historyList.push(i)
+      state.historyList = unique(state.historyList, 'songId')
       state.audioList = []
       state.audioList = f.list
       state.view.openFlag = false
@@ -57,7 +59,6 @@ const store = new Vuex.Store({
       } else {
         ++state.audio.songIndex
       }
-
       store.commit('fill', {list: list, n: state.audio.songIndex})
     }
   }
