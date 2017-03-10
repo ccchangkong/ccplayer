@@ -135,12 +135,10 @@ header {
   max-height: 100vw;
 }*/
 .a-img {
-  /*height: 100%;*/
   width: 100%;
 }
 main {
   flex: auto;
-  /*overflow-y: scroll;*/
   display: flex;
   flex-direction: column;
   background-color: #4a4a4a;
@@ -185,7 +183,7 @@ nav a:nth-of-type(2){
   text-shadow:3px 3px 10px rgba(187, 97, 155, 0.8);
 }
 section .a-view{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .view-ul{
  

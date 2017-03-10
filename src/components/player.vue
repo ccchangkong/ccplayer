@@ -53,7 +53,7 @@ export default {
   methods: {
     togglePanel () {
       let player = this.$refs.player
-      if (player !== null) {
+      if (player.src !== '') {
         this.audio.currentFlag = !this.audio.currentFlag
         if (!player.paused) {
           player.pause()
