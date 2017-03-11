@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class='{Act:view.openFlag}' :style="{height: innerHeight + 'px'}" @resize='test'>
+  <div id="app" :class='{Act:view.openFlag}' :style="{height: innerHeight + 'px'}">
      <!--<Lianyi></Lianyi>-->
      <header>
      <img :src="audio.imgUrl" v-show='view.imgFlag' alt="" class="a-img">
@@ -54,9 +54,6 @@ export default {
     ])
   },
   methods: {
-    test () {
-      window.alert()
-    },
     appTh (e) {
       this.y = (e || window.event).touches[0].clientY
       document.addEventListener('touchmove', this.appThmove)
