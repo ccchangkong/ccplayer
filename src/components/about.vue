@@ -3,14 +3,14 @@
     <div class="about-box">
       <div class="about-header">Cc.Player</div>
       <div class="about-main">
-        <p class="about-main-title">cc长空制作&J.Su设计</p>
+        <p class="about-main-title">cc长空制作</br>J.Su设计</p>
         <img src="../pic/ac.png" alt="" class="about-main-pic">
         <div class="about-main-icons">
           <a href="http://weibo.com/u/1820064530" target="_blank"><span class="about-main-icon">微博</span></a>
           <a href="http://www.vastskycc.com/"target="_blank"><span class="about-main-icon">博客</span></a>
           <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=agkCBgVaBSobG0QJBQc"target="_blank"><span class="about-main-icon">邮箱</span></a>
         </div>
-        <p class="about-main-ver">Ver 1.0.0</p>
+        <p class="about-main-ver">Ver 1.0.1</p>
         <i class="material-icons close-btn"@click.self='changeAbout'>clear</i>
       </div>
     </div>
@@ -64,16 +64,16 @@ export default {
   width: 40rem;
   max-width: 80%;
   max-height: 80%;
-  box-shadow: 0 0 10rem #aaa;
+  box-shadow: 0 0 3rem #aaa;
   overflow: hidden;
 }
 
 .about-header{
-  background-image:linear-gradient(limegreen, transparent), linear-gradient(45deg, skyblue, transparent), linear-gradient(-135deg, coral, transparent);
+  background-image:linear-gradient(#bf4c4c, transparent), linear-gradient(45deg, #007eb1, transparent), linear-gradient(-135deg, #1f1f1f, transparent), linear-gradient(-240deg, #671c00, #d2a2a6);
   background-blend-mode: screen;
   background-size: 100% 200%;
   background-position-y: 0;
-  box-shadow: 0 0 10px #e5e5e5 inset;
+  box-shadow: 0 0 5px #e5e5e5 inset;
   height: 30%;
   max-height: 10rem;
   transition: 0.5s;
@@ -83,7 +83,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 1rem 1rem 0
+  padding: 0 1rem 1rem 0;
+  /*-webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;  */
 }
 .about-header:hover{
   background-position-y: 50%;
@@ -103,19 +105,20 @@ export default {
   width: 110px;
   height: 95px;
   margin-bottom: 2rem;
+  border-radius: 15%/0 0 25% 0;
   /*border-radius: 10%;
   box-shadow: 0 0 0.5rem #aaa;*/
 }
 .about-main-title{
-  font-size: 1.5rem;
-  line-height: 2.5;
-  padding-bottom: 2rem;
+  font-size: 1.2rem;
+  line-height: 2;
+  padding-bottom: 1.2rem;
 }
 .about-main-icon{
   font-size: 0.8rem;
-  line-height: 2;
+  /*line-height: 2;*/
   margin: 0 1em;
-  padding:0.1rem 0.5rem;
+  padding:0.2rem 0.5rem;
   border: 0.1rem solid #4a4a4a;
   border-radius: 15%/0 0 25% 0;
   transition: 0.3s;
@@ -132,6 +135,7 @@ export default {
   display: flex;
   align-self: center;
   font-size: 0.8rem;
+  line-height: 1;
   color: #9a9a9a;
 }
 .close-btn{

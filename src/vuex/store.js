@@ -7,11 +7,12 @@ const store = new Vuex.Store({
   state: {
     view: {
       openFlag: true,
-      aboutFlag: false
+      aboutFlag: false,
+      imgFlag: false
     },
     audio: {
       songUrl: '',
-      songId: '105552428',
+      songId: '',
       imgUrl: '',
       title: '你好呀',
       singer: '请搜索歌曲',
@@ -29,7 +30,7 @@ const store = new Vuex.Store({
   mutations: {
     setAudio () {
     },
-    fill (state, f, w = 500) {
+    fillSong (state, f, w = 500) {
       let i = f.list[f.n]
       state.audio.songUrl = `http://ws.stream.qqmusic.qq.com/${i.songId}.m4a?fromtag=46`
       state.audio.imgUrl = `http://imgcache.qq.com/music/photo/album_${w}/${i.imgId % 100}/${w}_albumpic_${i.imgId}_0.jpg`
@@ -42,6 +43,8 @@ const store = new Vuex.Store({
       state.audioList = []
       state.audioList = f.list
       state.view.openFlag = false
+      state.view.imgFlag = true
+      document.querySelector('#player').play()
     },
     prev (state) {
       var list = state.audioList
@@ -50,7 +53,7 @@ const store = new Vuex.Store({
       } else {
         state.audio.songIndex--
       }
-      store.commit('fill', {list: list, n: state.audio.songIndex})
+      store.commit('fillSong', {list: list, n: state.audio.songIndex})
     },
     next (state) {
       var list = state.audioList
@@ -59,7 +62,7 @@ const store = new Vuex.Store({
       } else {
         ++state.audio.songIndex
       }
-      store.commit('fill', {list: list, n: state.audio.songIndex})
+      store.commit('fillSong', {list: list, n: state.audio.songIndex})
     }
   }
 })

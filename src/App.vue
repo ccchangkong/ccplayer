@@ -1,8 +1,8 @@
 <template>
-  <div id="app" :class='{Act:view.openFlag}'>
+  <div id="app" :class='{Act:view.openFlag}' :style="{height: innerHeight + 'px'}" @resize='test'>
      <!--<Lianyi></Lianyi>-->
      <header>
-     <img :src="audio.imgUrl" alt="" class="a-img">
+     <img :src="audio.imgUrl" v-show='view.imgFlag' alt="" class="a-img">
      </header>
      <main  @touchstart="appTh">
       <player></player>
@@ -19,14 +19,14 @@
       </section>
      </main>
       <footer>
-        <Buttons></Buttons>
+        <BottomBtn></BottomBtn>
       </footer>
       <About></About>
   </div>
 </template>
 <script>
 import Player from './components/player.vue'
-import Buttons from './components/button.vue'
+import BottomBtn from './components/bottomBtn.vue'
 import About from './components/about.vue'
 import Lianyi from './components/lianyi.vue'
 import { mapGetters, mapState } from 'vuex'
@@ -34,13 +34,14 @@ export default {
   name: 'app',
   components: {
     Player,
-    Buttons,
+    BottomBtn,
     About,
     Lianyi
   },
   data () {
     return {
-      y: 0
+      y: 0,
+      innerHeight: window.innerHeight || document.documentElement.clientHeight
     }
   },
   computed: {
@@ -53,6 +54,9 @@ export default {
     ])
   },
   methods: {
+    test () {
+      window.alert()
+    },
     appTh (e) {
       this.y = (e || window.event).touches[0].clientY
       document.addEventListener('touchmove', this.appThmove)
@@ -73,6 +77,26 @@ export default {
       document.removeEventListener('touchmove', this.appThmove)
       document.removeEventListener('touchend', this.appThup)
     }
+  },
+  mounted () {
+    const that = this
+    window.onresize = () => {
+      return (() => {
+        that.innerHeight = window.innerHeight || document.documentElement.clientHeight
+      })()
+    }
+  },
+  watch: {
+    innerHeight (val) {
+      if (!this.timer) {
+        this.innerHeight = val
+        this.timer = true
+        setTimeout(() => {
+          // console.log(this.innerHeight)
+          this.timer = false
+        }, 500)
+      }
+    }
   }
 }
 </script>
@@ -80,6 +104,7 @@ export default {
 html {
   box-sizing: border-box;
   font-size: 16px;
+  tap-highlight-color:rgba(0,0,0,0);
 }
 
 *, *:before, *:after {
@@ -111,7 +136,6 @@ a:focus{
   -moz-osx-font-smoothing: grayscale;*/
   text-align: center;
   color: #2c3e50;
-  /*margin-top: 60px;*/
   height: 100vh;
   width: 100vw;
   overflow: hidden; 
@@ -121,7 +145,7 @@ a:focus{
 }
 header {
   flex: 0 0 55%;
-  background: linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
+  background:linear-gradient(45deg,#bf4c4c, transparent), linear-gradient( #007eb1, transparent), linear-gradient(-135deg, #1f1f1f, transparent), linear-gradient(-240deg, #671c00, #d2a2a6);
   background-blend-mode: screen;
   overflow: hidden;
   transition: .5s;
@@ -219,14 +243,14 @@ footer {
   
 }
 
-#app #player {
+#app .player-box {
   flex: auto;
   transition: 1s height;
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
 }
-#app.Act #player {
+#app.Act .player-box {
   flex: 0 0 3rem;
   flex-direction: row;
 }

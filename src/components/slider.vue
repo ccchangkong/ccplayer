@@ -131,7 +131,8 @@ export default {
     list-style: none;
     display: inline-block;
     vertical-align: middle;
-    margin: 0.2rem 0 0;
+    margin: 0.25rem 0 0;
+    user-select: none;
   }
   .slider-thumb {
     background-color: #fdfdfd;
@@ -144,6 +145,14 @@ export default {
     border-radius: 50%;
     transition: 0.5s box-shadow;
   }
+  .slider-thumb::before{
+    content: '';
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    right: -1rem;
+    bottom: -1rem;
+  }
   .slider-thumb:hover,
   .slider-thumb.Act {
      box-shadow: 0 0 5px #333;
@@ -154,6 +163,7 @@ export default {
     position: relative;
     font-size: 0px;
     cursor: pointer;
+    user-select: none;
   }
 
   .slider-fill {
@@ -163,5 +173,6 @@ export default {
     width: 0;
     left: 0;
     bottom: 0;
+    user-select: none;
   }
 </style>

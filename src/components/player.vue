@@ -1,13 +1,11 @@
 <template>
-  <div id="player" :class='{Act:view.openFlag}'>    
-    <audio ref="player" :src="audio.songUrl"  @timeupdate='pts' @canplay='apts' controls  loop autoplay></audio>
-   <!--<p>={{sliderValue}}%{{sValue}}</p>-->
-   
-   <!--<i class="material-icons"@click='yl'>{{volValue}}</i>-->
+  <div class="player-box" :class='{Act:view.openFlag}'>    
+    <audio ref="player" id="player" :src="audio.songUrl"  @timeupdate='currentTime' @canplay='songLengths' controls  loop autoplay></audio>
+   <!--<i class="material-icons"@click='soundChange'>{{volValue}}</i>-->
    <div class="a-slider">
     <p v-show='!view.openFlag' class="a-slider-p">{{audio.currentLength | time}}</p>
     <div class="a-slider-box"><slider v-model="sliderValue" @changeEvent='currentChange'></slider></div> 
-     <p v-show='!view.openFlag' class="a-slider-p">{{apt | time}}</p>
+     <p v-show='!view.openFlag' class="a-slider-p">{{songLength | time}}</p>
    </div>
    <div class="a-btn">
     <i class="material-icons a-btn-i"@click='prev'>skip_previous</i>
@@ -30,13 +28,13 @@ export default {
   },
   data () {
     return {
-      apt: 0,
+      songLength: 0,
       volFlag: true
     }
   },
   computed: {
     sliderValue () {
-      let a = this.apt === 0 ? 0 : Math.round((this.audio.currentLength / this.apt) * 100)
+      let a = this.songLength === 0 ? 0 : Math.round((this.audio.currentLength / this.songLength) * 100)
       return a
     },
     volValue () {
@@ -65,21 +63,19 @@ export default {
         }
       }
     },
-    pts () {
+    currentTime () {
       this.audio.currentLength = this.$refs.player.currentTime
     },
-    apts () {
-      this.apt = this.$refs.player.duration
+    songLengths () {
+      this.songLength = this.$refs.player.duration
       document.title = `▶ - ${this.audio.title} ccplayer`
     },
-    yl () {
+    soundChange () {
       this.volFlag = !this.volFlag
       this.$refs.player.muted = !this.$refs.player.muted
     },
     currentChange (val) {
-      // this.$refs.player.pause()
       this.$refs.player.currentTime = this.$refs.player.duration * val / 100
-      // this.$nextTick(() => this.$refs.player.play())
     },
     ...mapMutations([
       'prev',
@@ -100,20 +96,15 @@ export default {
       return minute + ':' + second
     }
   }
-  // watch: {
-  //   volFlag (val) {
-  //     this.$refs.player.muted = !val
-  //   }
-  // }
 }
 </script>
 <style>
 audio{
   display: none;
 }
-#player{
-position: relative;
-line-height: 3rem;
+.player-box{
+  position: relative;
+  line-height: 3rem;
 }
 .a-play{
   position: absolute;
@@ -133,7 +124,7 @@ line-height: 3rem;
   justify-content: space-around;
   flex: 0 0 3rem;
 }
-#player.Act .a-slider{
+.player-box.Act .a-slider{
   flex: 1 0 70%;
 }
 .a-slider-box{
@@ -150,7 +141,7 @@ line-height: 3rem;
   align-items: center;
   justify-content: center;
 }
-#player.Act .a-btn{
+.player-box.Act .a-btn{
 
 }
 .a-btn-i{
@@ -160,7 +151,7 @@ line-height: 3rem;
 .a-btn-i:nth-of-type(2){
   font-size: 5rem;
 }
-#player.Act .a-btn-i{
+.player-box.Act .a-btn-i{
   line-height: 2;  
   font-size: 1.5rem;
 }

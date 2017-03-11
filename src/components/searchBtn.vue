@@ -1,7 +1,7 @@
 <template>
-    <div class="text-field">
-        <input type="text" v-model="audio.keyWord" @keyup.enter='ajax'>
-      <i class="material-icons"@click='ajax'>search</i>
+    <div class="search-field">
+      <input type="text" class='s-input' v-model="audio.keyWord" @keyup.enter='ajax'>
+      <i class="material-icons s-input-i" @click='ajax'>search</i>
     </div>      
 </template>
 
@@ -64,11 +64,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.text-field{
+<style>
+.search-field{
 position: relative;
 }
-input{
+.s-input{
   border: none;
   outline: none;
   background-color: inherit;
@@ -76,26 +76,24 @@ input{
   line-height: 2rem;
   vertical-align: bottom;
 }
-.text-field::after{
+.search-field::after{
   content: '';
   position: absolute;
   left: 50%;
   bottom: 0;
   height: 2px;
   width: 0;
-  /*background-color: #fdfdfd;*/
-  /*background-color: #000;*/
   transition: .5s  cubic-bezier(0.23, 1, 0.32, 1);
   transform: translateX(-50%);
 }
-.text-field:hover::after{
+.search-field:hover::after{
   width: 30rem;
   max-width: 100%;
   background-color: #333;
 }
-i{
-      line-height: 2rem;
-    font-size: 1.5rem;
-    vertical-align: middle;
+.s-input-i{
+  line-height: 2rem;
+  font-size: 1.5rem;
+  vertical-align: middle;
 }
 </style>
